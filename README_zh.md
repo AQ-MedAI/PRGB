@@ -4,6 +4,11 @@
 
 PRGB (Placeholder RAG Benchmark) 是一个专注于评估检索增强生成（RAG）系统中文档忠实性与外部知识利用效率的基准工具。它通过多级过滤、跨实体推理等渐进维度，以及配备噪声文档的数据集，使用placeholders全面评测模型性能，助力研究人员和开发者分析主流RAG模型在复杂场景中的表现。
 
+![benchmark](png/benchmark.png)
+
+### 样例数据
+![benchmark](png/examples.png)
+
 ### 即将更新
 
 1. **基于API的推理**：提供基于API的推理以及检验功能
