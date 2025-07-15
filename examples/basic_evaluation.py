@@ -11,9 +11,10 @@ from pathlib import Path
 # Add the project root to Python path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from core import get_eval
 import argparse
 import json
+
+from core import get_eval
 
 
 def run_basic_evaluation():
@@ -25,7 +26,7 @@ def run_basic_evaluation():
         "model_path": "/path/to/your/model",  # Update this path
         "data_path": "tests/test.jsonl",
         "output_path": "./results",
-        "num_iterations": 1,
+        "num_iterations": 3,
         "noise_config": '{"noise_doc_level1":4,"noise_doc_level2":4,"noise_doc_level3":1}',
         "shuffle": True,
         "batch_size": 8,

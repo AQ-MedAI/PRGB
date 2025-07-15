@@ -1,14 +1,15 @@
 import argparse
 import json
 import logging
-from typing import Any, Dict, List, Optional, Tuple, Literal
+import os
+import sys
+from typing import Any, Dict, List, Literal, Optional, Tuple
 
 from tqdm import tqdm
-from .eval_types import EvalResult, EvalResults
-from .data import DataPreprocess
 
-import sys
-import os
+from .data import DataPreprocess
+from .eval_types import EvalResult, EvalResults
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from api_models.api import request_model
 
@@ -222,7 +223,7 @@ if __name__ == "__main__":
         help="number of external passages",
     )
     parser.add_argument(
-        "--num_iterations", type=int, default=1, help="number of iterations"
+        "--num_iterations", type=int, default=3, help="Number of evaluation iterations. For each query, randomly select n different placeholders to run evaluation. Each placeholder represents a different version of the same query with different variable substitutions."
     )
     args = parser.parse_args()
 

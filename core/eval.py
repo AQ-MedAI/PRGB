@@ -215,7 +215,7 @@ if __name__ == "__main__":
         help="number of external passages",
     )
     parser.add_argument(
-        "--num_iterations", type=int, default=3, help="number of iterations"
+        "--num_iterations", type=int, default=3, help="Number of evaluation iterations. For each query, randomly select n different placeholders to run evaluation. Each placeholder represents a different version of the same query with different variable substitutions."
     )
     parser.add_argument(
         "--gpu", type=int, default=8, help="number of iterations"

@@ -181,7 +181,7 @@ python eval.py \
     --noise-config '{"noise_doc_level1":4,"noise_doc_level2":4,"noise_doc_level3":1}' \
     --custom_config "config/default_prompt_config.json" \
     --shuffle True \
-    --num-iterations 1 \
+    --num-iterations 3 \
     --verbose
 ```
 
@@ -207,9 +207,11 @@ python eval.py \
   - Supports JSONL format data files
   - Chinese data: `data/zh.jsonl`
   - English data: `data/en.jsonl`
-- `--num-iterations`: Number of evaluation iterations (default: 1)
-  - Used for multiple evaluations to get average scores
-  - Recommended values: 1-5 times
+- `--num-iterations`: Number of evaluation iterations (default: 3)
+    - For each query, randomly select n different placeholders to run evaluation
+    - Each placeholder represents a different version of the same query with different variable substitutions
+    - Used for multiple evaluations to get average scores
+    - Recommended values: 1-5 times
 - `--shuffle`: Whether to shuffle data (default: True)
   - Controls whether to randomly shuffle evaluation data order
   - Helps reduce order bias
@@ -288,8 +290,7 @@ PRGB/
 ├── core/                   # Core functionality modules
 │   ├── __init__.py        # Module initialization
 │   ├── eval.py            # Main evaluation logic
-│   ├── eval_apis.py       # API evaluation
-│   ├── eval_draft.py      # Draft evaluation
+│   ├── eval_apis.py       # API evaluation(PENDING)
 │   ├── data.py            # Data processing
 │   ├── models.py          # Model definitions
 │   └── eval_types.py      # Evaluation type definitions

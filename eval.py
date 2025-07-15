@@ -66,8 +66,8 @@ Examples:
     parser.add_argument(
         "--num-iterations",
         type=int,
-        default=1,
-        help="Number of evaluation iterations"
+        default=3,
+        help="Number of evaluation iterations. For each query, randomly select n different placeholders to run evaluation. Each placeholder represents a different version of the same query with different variable substitutions."
     )
 
     # Output configuration

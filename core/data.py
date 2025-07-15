@@ -1,8 +1,8 @@
-from dataclasses import dataclass, asdict
-from typing import List, Dict, Literal, Tuple
 import json
-import random
 import logging
+import random
+from dataclasses import asdict, dataclass
+from typing import Dict, List, Literal, Tuple
 
 # Configure logger
 logger = logging.getLogger(__name__)
@@ -152,7 +152,10 @@ class DataPreprocess:
         """
         Generate input for the model.
         Args:
-            num_iterations: number of iterations to randomly select from available placeholders
+            num_iterations: number of iterations to randomly select from available placeholders. 
+                           For each query, this parameter determines how many different placeholder 
+                           versions will be used for evaluation. Each placeholder represents a 
+                           different version of the same query with different variable substitutions.
             noise_config: noise configuration, it contains the number of noisy passages for each noise level
             shuffle: whether to shuffle the data
         Returns:
@@ -282,7 +285,7 @@ class CustomDataPreprocess(DataPreprocess):
 if __name__ == "__main__":
     # 从JSONL文件读取数据
     data_list = RagData.from_jsonl(
-        "/medrag/xingyi/data/placeholder/deductive_v2_fix_0514.jsonl"
+        "deductive_v2_fix_0514.jsonl"
     )
 
     # 处理读取到的数据

@@ -4,3 +4,8 @@ numpy
 json
 argparse
 requests
+
+# local inference by vllm
+vllm
+transformers
+torch

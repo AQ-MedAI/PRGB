@@ -176,7 +176,7 @@ python eval.py \
     --noise-config '{"noise_doc_level1":4,"noise_doc_level2":4,"noise_doc_level3":1}' \
     --custom_config "config/default_prompt_config.json" \
     --shuffle True \
-    --num-iterations 1 \
+    --num-iterations 3 \
     --verbose
 ```
 
@@ -202,9 +202,11 @@ python eval.py \
   - 支持JSONL格式的数据文件
   - 中文数据：`data/zh.jsonl`
   - 英文数据：`data/en.jsonl`
-- `--num-iterations`: 评估迭代次数（默认：1）
-  - 用于多次评估取平均分数
-  - 建议值：1-5次
+- `--num-iterations`: 评估迭代次数（默认：3）
+    - 对每个查询，随机选择n个不同的占位符进行评估
+    - 每个占位符代表同一查询的不同版本，具有不同的变量替换
+    - 用于多次评估取平均分数
+    - 建议值：1-5次
 - `--shuffle`: 是否打乱数据（默认：True）
   - 控制是否随机打乱评估数据顺序
   - 有助于减少顺序偏差
@@ -282,8 +284,7 @@ PRGB/
 ├── core/                   # 核心功能模块
 │   ├── __init__.py        # 模块初始化
 │   ├── eval.py            # 主评估逻辑
-│   ├── eval_apis.py       # API评估
-│   ├── eval_draft.py      # 草稿评估
+│   ├── eval_apis.py       # API评估(暂不支持，建设中)
 │   ├── data.py            # 数据处理
 │   ├── models.py          # 模型定义
 │   └── eval_types.py      # 评估类型定义
