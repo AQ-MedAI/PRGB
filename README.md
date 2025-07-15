@@ -8,9 +8,11 @@ PRGB (Placeholder RAG Benchmark) is a benchmark tool focused on evaluating docum
 
 ### Upcoming Updates
 
-1. **Data Quality Improvement**: The dataset is currently undergoing manual verification and will soon have a more accurate version with improved data quality and consistency.
+1. **API-based Inference**: Provide inference and verification functionalities based on APIs. 
 
-2. **Retrieval Testing Version**: A version specifically designed for testing retrieval systems is currently under development and will be released soon.
+2. **Data Quality Improvement**: The dataset is currently undergoing manual verification and will soon have a more accurate version with improved data quality and consistency.
+
+3. **Retrieval Testing Version**: A version specifically designed for testing retrieval systems is currently under development and will be released soon.
 
 ## Key Features
 
