@@ -1,4 +1,4 @@
-# PRGB - RAG System Evaluation Tool
+# PRGB - RAG Evaluation Tool by Placeholders
 
 [中文文档](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
 
@@ -6,16 +6,16 @@
 
 PRGB (Placeholder RAG Benchmark) is a benchmark tool focused on evaluating document faithfulness and external knowledge utilization efficiency in Retrieval-Augmented Generation (RAG) systems. It comprehensively evaluates model performance through progressive dimensions such as multi-level filtering and cross-entity reasoning, using placeholders with noise-injected datasets to help researchers and developers analyze the performance of mainstream RAG models in complex scenarios.
 
-![benchmark](png/benchmark.png)
+![benchmark](pic/benchmark.jpg)
 
 ### Demo Data
-![benchmark](png/examples.png)
+
+![data](pic/examples.jpg)
+
 ### Upcoming Updates
 
-1. **API-based Inference**: Provide inference and verification functionalities based on APIs. 
-
+1. **API-based Inference**: Provide inference and verification functionalities based on APIs.
 2. **Data Quality Improvement**: The dataset is currently undergoing manual verification and will soon have a more accurate version with improved data quality and consistency.
-
 3. **Retrieval Testing Version**: A version specifically designed for testing retrieval systems is currently under development and will be released soon.
 
 ## Key Features
@@ -220,10 +220,10 @@ python eval.py \
   - Chinese data: `data/zh.jsonl`
   - English data: `data/en.jsonl`
 - `--num-iterations`: Number of evaluation iterations (default: 3)
-    - For each query, randomly select n different placeholders to run evaluation
-    - Each placeholder represents a different version of the same query with different variable substitutions
-    - Used for multiple evaluations to get average scores
-    - Recommended values: 1-5 times
+  - For each query, randomly select n different placeholders to run evaluation
+  - Each placeholder represents a different version of the same query with different variable substitutions
+  - Used for multiple evaluations to get average scores
+  - Recommended values: 1-5 times
 - `--shuffle`: Whether to shuffle data (default: True)
   - Controls whether to randomly shuffle evaluation data order
   - Helps reduce order bias

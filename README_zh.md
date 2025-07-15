@@ -8,7 +8,7 @@ PRGB (Placeholder RAG Benchmark) 是一个专注于评估检索增强生成（RA
 
 ### 样例数据
 
-![benchmark](png/examples.png)
+![data](png/examples.jpg)
 
 ### 即将更新
 
