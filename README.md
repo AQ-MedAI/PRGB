@@ -86,15 +86,6 @@ The table below shows the performance of various state-of-the-art models on Engl
 | `GPT4.1`                   | 60.79               | 84.76               | 64.02               | 35.37               |
 | `Gemma3_4b`                | 57.58               | 77.98               | 48.50               | 59.41               |
 
-### Results Analysis
-
-From the experimental results, we can observe:
-
-1. **Model Scale Effect**: Overall performance shows an upward trend as model parameter size increases
-2. **Multi-language Performance**: Performance on English datasets is generally better than on Chinese datasets
-3. **Task Differences**: Different task types (Multi-Level Filter, Composition, Reasoning) require different model capabilities
-4. **Thinking Mode**: Models with thinking mode enabled typically perform better
-
 ## Installation
 
 ### Requirements
