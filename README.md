@@ -28,6 +28,9 @@ PRGB (Placeholder RAG Benchmark) is a benchmark tool focused on evaluating docum
 
 ## Experimental Results
 
+In our experiments, we uniformly set the following configurations:  
+`noise_config: '{"noise_doc_level1":4,"noise_doc_level2":4,"noise_doc_level3":1}'`, `num_iterations: 3`, and `shuffle: True`.
+
 ### Chinese Dataset Performance Comparison
 
 The table below shows the performance of various state-of-the-art models on Chinese datasets, sorted by Overall score from high to low. **Bold** values indicate the best experimental results, and ***italic bold*** values indicate the second-best experimental results.
