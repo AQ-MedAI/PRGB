@@ -92,7 +92,7 @@ From the experimental results, we can observe:
 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Alipay-Med/PRGB.git
 cd PRGB
 ```
 
@@ -102,13 +102,7 @@ cd PRGB
 pip install -r requirements.txt
 ```
 
-3. Install development dependencies (optional)
-
-```bash
-pip install -e .
-```
-
-4. Verify installation
+3. Verify installation
 
 ```bash
 python test_imports.py
