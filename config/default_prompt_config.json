@@ -1,0 +1,4 @@
+{
+    "system_prompt": "不需要使用<|Reason|>开始思考，以标签<|ANSWER|>开始您的最终答案，以<|ANSWER|>: $answer 的形式结束您的回复。",
+    "user_prompt": "## 以下内容是基于用户发送的消息的搜索结果\n{docs}\n## 用户消息为\n{query}"
+}

@@ -1,0 +1,5 @@
+{
+    "system_prompt": "You are a helpful assistant. Please answer the user's question based on the provided documents.",
+    "user_prompt": "## The following is the search results based on the user's message\n{docs}\n## The user's message is\n{query}",
+    "random_seed": 0
+}
