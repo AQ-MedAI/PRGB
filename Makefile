@@ -15,7 +15,9 @@ help:
 	@echo "  docs         Build documentation"
 	@echo "  eval         Run evaluation (requires EVAL_MODEL_PATH env var)"
 	@echo "  eval-ch      Run Chinese evaluation (data/zh.jsonl)"
+	@echo "  eval-ch-infer Run Chinese evaluation in inference mode (data/zh.jsonl)"
 	@echo "  eval-en      Run English evaluation (data/en.jsonl)"
+	@echo "  eval-en-infer Run English evaluation in inference mode (data/en.jsonl)"
 	@echo "  eval-test    Run evaluation with test data"
 	@echo "  export-errors Export error samples (requires EVAL_RESULT_FILE env var)"
 	@echo ""
@@ -23,7 +25,9 @@ help:
 	@echo "  export EVAL_MODEL_PATH=/path/to/your/model && make eval"
 	@echo "  EVAL_MODEL_PATH=/path/to/your/model make eval"
 	@echo "  EVAL_MODEL_PATH=/path/to/your/model make eval-ch"
+	@echo "  EVAL_MODEL_PATH=/path/to/your/model make eval-ch-infer"
 	@echo "  EVAL_MODEL_PATH=/path/to/your/model make eval-en"
+	@echo "  EVAL_MODEL_PATH=/path/to/your/model make eval-en-infer"
 	@echo "  EVAL_RESULT_FILE=results/model_eval_result.jsonl make export-errors"
 	@echo ""
 
@@ -82,9 +86,15 @@ eval:
 	fi
 	@echo "Using model path: $(EVAL_MODEL_PATH)"
 	python eval.py \
-		--model-name "Qwen3_infer" \
+		--model-name "Qwen3" \
 		--model-path "$(EVAL_MODEL_PATH)" \
 		--data-path "data/zh.jsonl" \
+		--output-path "./results" \
+		--batch-size 16
+	python eval.py \
+		--model-name "Qwen3" \
+		--model-path "$(EVAL_MODEL_PATH)" \
+		--data-path "data/en.jsonl" \
 		--output-path "./results" \
 		--batch-size 16
 
@@ -102,8 +112,30 @@ eval-ch:
 	@echo "Using model path: $(EVAL_MODEL_PATH)"
 	@echo "Using Chinese data: data/zh.jsonl"
 	python eval.py \
+		--model-name "Qwen3" \
+		--model-path "$(EVAL_MODEL_PATH)" \
+		--data-path "data/zh.jsonl" \
+		--output-path "./results" \
+		--batch-size 16
+
+# Chinese evaluation in inference mode (requires GPU)
+# Usage: make eval-ch-infer (requires EVAL_MODEL_PATH environment variable)
+eval-ch-infer:
+	@echo "Running Chinese evaluation in inference mode..."
+	@echo "Note: This requires GPU and model files"
+	@if [ -z "$(EVAL_MODEL_PATH)" ]; then \
+		echo "Error: EVAL_MODEL_PATH environment variable is required."; \
+		echo "Please set it first: export EVAL_MODEL_PATH=/path/to/your/model"; \
+		echo "Or run: EVAL_MODEL_PATH=/path/to/your/model make eval-ch-infer"; \
+		exit 1; \
+	fi
+	@echo "Using model path: $(EVAL_MODEL_PATH)"
+	@echo "Using Chinese data: data/zh.jsonl"
+	@echo "Running in inference mode with Qwen3_infer model"
+	python eval.py \
 		--model-name "Qwen3_infer" \
 		--model-path "$(EVAL_MODEL_PATH)" \
+		--inference-mode true \
 		--data-path "data/zh.jsonl" \
 		--output-path "./results" \
 		--batch-size 16
@@ -124,6 +156,28 @@ eval-en:
 	python eval.py \
 		--model-name "Qwen3_infer" \
 		--model-path "$(EVAL_MODEL_PATH)" \
+		--data-path "data/en.jsonl" \
+		--output-path "./results" \
+		--batch-size 16
+
+# English evaluation in inference mode (requires GPU)
+# Usage: make eval-en-infer (requires EVAL_MODEL_PATH environment variable)
+eval-en-infer:
+	@echo "Running English evaluation in inference mode..."
+	@echo "Note: This requires GPU and model files"
+	@if [ -z "$(EVAL_MODEL_PATH)" ]; then \
+		echo "Error: EVAL_MODEL_PATH environment variable is required."; \
+		echo "Please set it first: export EVAL_MODEL_PATH=/path/to/your/model"; \
+		echo "Or run: EVAL_MODEL_PATH=/path/to/your/model make eval-en-infer"; \
+		exit 1; \
+	fi
+	@echo "Using model path: $(EVAL_MODEL_PATH)"
+	@echo "Using English data: data/en.jsonl"
+	@echo "Running in inference mode with Qwen3_infer model"
+	python eval.py \
+		--model-name "Qwen3_infer" \
+		--model-path "$(EVAL_MODEL_PATH)" \
+		--inference-mode true \
 		--data-path "data/en.jsonl" \
 		--output-path "./results" \
 		--batch-size 16
@@ -167,4 +221,4 @@ check-structure:
 	@test -d utils || echo "Missing: utils/ directory"
 	@test -d config || echo "Missing: config/ directory"
 	@test -d tests || echo "Missing: tests/ directory"
-	@echo "Structure check complete!" 
+	@echo "Structure check complete!"
