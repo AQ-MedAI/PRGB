@@ -28,36 +28,37 @@ PRGB (Placeholder RAG Benchmark) is a benchmark tool focused on evaluating docum
 
 ## Experimental Results
 
-In our experiments, we uniformly set the following configurations:  
+In our experiments, we uniformly set the following configurations:
 `noise_config: '{"noise_doc_level1":4,"noise_doc_level2":4,"noise_doc_level3":1}'`, `num_iterations: 3`, and `shuffle: True`.
 
 ### Chinese Dataset Performance Comparison
 
 The table below shows the performance of various state-of-the-art models on Chinese datasets, sorted by Overall score from high to low. **Bold** values indicate the best experimental results, and ***italic bold*** values indicate the second-best experimental results.
 
-| Models                         | Overall             | Multi-Level Filter  | Composition         | Reasoning           |
-| ------------------------------ | ------------------- | ------------------- | ------------------- | ------------------- |
-| `Qwen-3-235B-A22B`           | **90.27**     | **98.33**     | **95.90**     | **76.65**     |
-| `Gemini-2.5-pro-preview`     | ***87.33*** | ***97.92*** | ***94.20*** | 70.18               |
-| `Claude-3.7-sonnet`          | 85.74               | 97.62               | 90.59               | ***70.39*** |
-| `Qwen3-30B-A3B`              | 82.10               | 96.17               | 88.05               | 63.64               |
-| `Gemini-2.5-flash-preview`   | 81.85               | 93.92               | 88.54               | 63.86               |
-| `Deepseek-V3(241226)`        | 77.54               | 94.58               | 81.00               | 60.32               |
-| `Qwen-3-235B-A22B w/o think` | 75.20               | 91.50               | 79.67               | 57.14               |
-| `Qwen-2.5-MAX`               | 74.43               | 93.25               | 78.28               | 55.37               |
-| `Qwen3_32B`                  | 69.69               | 89.75               | 75.74               | 46.70               |
-| `Gemma3_27b`                 | 70.24               | 73.09               | 92.21               | 50.24               |
-| `Qwen2.5_72B`                | 64.87               | 92.92               | 64.99               | 44.14               |
-| `Qwen3_32B w/o think`        | 60.73               | 59.53               | 89.50               | 41.30               |
-| `Qwen2.5_32B`                | 58.76               | 92.00               | 51.33               | 44.60               |
-| `Qwen3_8B`                   | 63.04               | 86.87               | 67.49               | 39.47               |
-| `Qwen2.5_14B`                | 55.94               | 89.42               | 52.69               | 35.87               |
-| `GPT4.1`                     | 66.26               | 89.75               | 71.95               | 41.27               |
-| `GPT4o-1120`                 | 64.58               | 88.50               | 70.21               | 39.35               |
-| `Qwen2.5_7B`                 | 49.31               | 83.29               | 47.47               | 26.92               |
-| `Qwen3_8B w/o think`         | 50.02               | 47.83               | 83.96               | 28.17               |
-| `Gemma3_12b`                 | 64.10               | 60.20               | 89.92               | 50.52               |
-| `Gemma3_4b`                  | 47.67               | 37.41               | 78.33               | 39.26               |
+| Models                        | Overall | Multi-Level Filter | Composition   | Reasoning     |
+| ----------------------------- | ------- | ------------------ | ------------- | ------------- |
+| `Gemini-2.5-pro-preview`    | 87.33   | **97.92**         | **94.20**    | ***70.18*** |
+| `Claude-3.7-sonnet`         | 85.74   | ***97.62***      | ***90.59*** | **70.39**    |
+| `Gemini-2.5-flash-preview`  | 81.85   | 93.92              | 88.54         | 63.86         |
+| `Qwen3-235B-A22B`           | 80.76   | 94.92              | 88.18         | 60.23         |
+| `Qwen3-30B-A3B`             | 80.45   | 95.87              | 86.11         | 61.42         |
+| `Deepseek-V3(241226)`       | 77.54   | 94.58              | 81.00         | 60.32         |
+| `Qwen3-235B-A22B w/o think` | 75.20   | 91.50              | 79.67         | 57.14         |
+| `Qwen-2.5-MAX`              | 74.43   | 93.25              | 78.28         | 55.37         |
+| `Qwen3-30B-A3B w/o think`   | 71.05   | 91.08              | 72.22         | 54.76         |
+| `Gemma3_27b`                | 70.24   | 73.09              | 92.21         | 50.24         |
+| `Qwen3_32B`                 | 69.69   | 89.75              | 75.74         | 46.70         |
+| `GPT4.1`                    | 66.26   | 89.75              | 71.95         | 41.27         |
+| `Qwen2.5_72B`               | 64.87   | 92.92              | 64.99         | 44.14         |
+| `GPT4o-1120`                | 64.58   | 88.50              | 70.21         | 39.35         |
+| `Gemma3_12b`                | 64.10   | 60.20              | 89.92         | 50.52         |
+| `Qwen3_8B`                  | 63.04   | 86.87              | 67.49         | 39.47         |
+| `Qwen3_32B w/o think`       | 60.73   | 59.53              | 89.50         | 41.30         |
+| `Qwen2.5_32B`               | 58.76   | 92.00              | 51.33         | 44.60         |
+| `Qwen2.5_14B`               | 55.94   | 89.42              | 52.69         | 35.87         |
+| `Qwen2.5_7B`                | 49.31   | 83.29              | 47.47         | 26.92         |
+| `Qwen3_8B w/o think`        | 50.02   | 47.83              | 83.96         | 28.17         |
+| `Gemma3_4b`                 | 47.67   | 37.41              | 78.33         | 39.26         |
 
 ### English Dataset Performance Comparison
 
@@ -142,10 +143,12 @@ make eval
 EVAL_MODEL_PATH=/path/to/your/model make eval
 
 # Chinese evaluation (using data/zh.jsonl)
-EVAL_MODEL_PATH=/path/to/your/model make eval-ch
+# Chinese evaluation with inference mode (using data/zh.jsonl)
+EVAL_MODEL_PATH=/path/to/your/model make eval-ch-infer
 
 # English evaluation (using data/en.jsonl)
-EVAL_MODEL_PATH=/path/to/your/model make eval-en
+# English evaluation with inference mode (using data/en.jsonl)
+EVAL_MODEL_PATH=/path/to/your/model make eval-en-infer
 
 # Test evaluation (no real model needed)
 make eval-test
@@ -248,6 +251,10 @@ python eval.py \
 
 ##### Debug Parameters
 
+- `--inference-mode`: Whether to use inference mode (default: False)
+  - When set to True, enables inference mode for the model
+  - Used with inference-optimized models like Qwen3_infer
+  - Typically used with the eval-ch-infer and eval-en-infer make commands
 - `--verbose`: Enable detailed logging (default: False)
   - Outputs detailed evaluation process and debug information
   - Helps with problem troubleshooting and performance analysis

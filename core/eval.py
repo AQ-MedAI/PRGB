@@ -13,8 +13,12 @@ logging.basicConfig(
 
 
 def checkanswer_acc(
-    predictions: List[str], answers: List[str]
+    predictions: List[str], answers: List[str], is_infer_model: bool = False
 ) -> Tuple[List[int], List[int]]:
+    if is_infer_model:
+        import re
+        predictions = [re.sub(r"<think>.*</think>", "", answer, flags=re.DOTALL).strip() for answer in predictions]
+
     labels = []
 
     def evaluate_expression(expr: str, prediction: str) -> bool:
@@ -99,7 +103,6 @@ def checkanswer_acc(
 def get_eval(args):
     model_name = args.model_name
     model_path = args.model_path
-    model_name = model_path.split("/")[-1]
     output_path = args.output_path
     noise_config = json.loads(args.noise_config)
     shuffle = args.shuffle
@@ -122,7 +125,7 @@ def get_eval(args):
 
     # 采样
     # ragdata.data = ragdata.data[:5]
-    if "infer" not in model_name.lower():
+    if not args.inference_mode:
         if "qwen3" in model_name.lower():
             model = Qwen3Vllm(plm=model_path, think_mode=False)
         else:
@@ -144,7 +147,7 @@ def get_eval(args):
     predictions = model.batch_generate(
         prompts, temperature, batch_size=batch_size
     )
-    error, labels = checkanswer_acc(predictions, answers)
+    error, labels = checkanswer_acc(predictions, answers, is_infer_model=args.inference_mode)
 
     eval_results = EvalResults()
     for i in range(len(idxs)):
@@ -157,7 +160,7 @@ def get_eval(args):
             label=labels[i],
         )
         eval_results.add_result(result)
-    # breakpoint()
+
     eval_results.calculate_scores(True)
     eval_results.save_to_jsonl(f"{output_path}/{model_name}_eval_result_{str(noise_config)}.jsonl")
 
@@ -174,6 +177,9 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--model-name", type=str, default="Qwen", help="model name"
+    )
+    parser.add_argument(
+        "--inference-mode", type=bool, default=False, help="whether inference model or not"
     )
     parser.add_argument(
         "--data-path",

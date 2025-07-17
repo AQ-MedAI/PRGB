@@ -50,6 +50,9 @@ Examples:
         help="Name of the model to evaluate"
     )
     parser.add_argument(
+        "--inference-mode", type=bool, default=False, help="whether inference model or not"
+    )
+    parser.add_argument(
         "--model-path",
         type=str,
         required=True,
