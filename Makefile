@@ -1,4 +1,4 @@
- .PHONY: help install install-dev test lint format clean docs test-imports
+.PHONY: help install install-dev test lint format clean docs test-imports
 
 # Default target
 help:
