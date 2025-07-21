@@ -287,26 +287,32 @@ python examples/export_errors.py
 PRGB/
 ├── README.md                 # Project documentation
 ├── README_zh.md             # Chinese documentation
+├── USAGE.md                 # Usage guide
 ├── pyproject.toml           # Project configuration
 ├── requirements.txt         # Python dependencies
 ├── eval.py                 # Main evaluation script
-├── test_imports.py         # Import test script
+├── example_usage.py        # Example usage script
 ├── run_eval.sh             # Run script
+├── run_http_eval.sh        # HTTP evaluation script
 ├── Makefile                # Build and development commands
 ├── CONTRIBUTING.md         # Contribution guidelines
 ├── CHANGELOG.md            # Change log
+├── LEGAL.md                # Legal notice
 ├── .gitignore              # Git ignore file
 ├── .flake8                 # Code style configuration
 ├── .pre-commit-config.yaml # Pre-commit hook configuration
-├── LEGAL.md                # Legal notice
+├── .gitattributes          # Git attributes
 │
 ├── core/                   # Core functionality modules
 │   ├── __init__.py        # Module initialization
 │   ├── eval.py            # Main evaluation logic
-│   ├── eval_apis.py       # API evaluation(PENDING)
 │   ├── data.py            # Data processing
-│   ├── models.py          # Model definitions
-│   └── eval_types.py      # Evaluation type definitions
+│   ├── eval_types.py      # Evaluation type definitions
+│   ├── logger.py          # Logging functionality
+│   └── models/            # Model implementations
+│       ├── __init__.py    # Models module initialization
+│       ├── api_models.py  # API-based model implementations
+│       └── vllm_models.py # VLLM-based model implementations
 │
 ├── config/                 # Configuration files
 │   ├── api_prompt_config_ch.json  # Chinese API prompt configuration
@@ -315,18 +321,28 @@ PRGB/
 │
 ├── utils/                  # Utility functions
 │   ├── __init__.py        # Module initialization
-│   ├── filter_mutual_right_samples.py  # Filter mutually correct samples
-│   ├── filter_similar_query.py         # Filter similar queries
-│   └── transfer_csv_to_jsonl.py        # CSV to JSONL conversion tool
+│   └── transfer_csv_to_jsonl.py  # CSV to JSONL conversion tool
 │
 ├── examples/               # Example scripts
 │   ├── basic_evaluation.py # Basic usage example
 │   └── export_errors.py    # Error sample export example
 │
-└── tests/                  # Test files
-    ├── test_data_process.py    # Data processing tests
-    ├── test_checkanswer.py     # Answer checking tests
-    └── test.jsonl              # Test data
+├── tests/                  # Test files
+│   ├── test_imports.py     # Import test script
+│   ├── test_data_process.py    # Data processing tests
+│   ├── test_checkanswer.py     # Answer checking tests
+│   ├── test_eval.py            # Evaluation tests
+│   └── test_import_models.py   # Model import tests
+│
+├── data/                   # Data files
+│   ├── zh.jsonl           # Chinese evaluation data
+│   └── en.jsonl           # English evaluation data
+│
+├── results/                # Evaluation results (generated)
+│
+└── pic/                    # Images and figures
+    ├── benchmark.jpg       # Benchmark figure
+    └── examples.jpg        # Examples figure
 ```
 
 ## Development Guide

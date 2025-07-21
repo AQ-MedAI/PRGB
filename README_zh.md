@@ -288,47 +288,64 @@ python examples/export_errors.py
 
 ```
 PRGB/
-├── README.md                 # 项目说明文档
-├── pyproject.toml           # 项目配置文件
-├── requirements.txt         # Python依赖
-├── eval.py                 # 主评估脚本
-├── test_imports.py         # 导入测试脚本
-├── run_eval.sh             # 运行脚本
-├── Makefile                # 构建和开发命令
-├── CONTRIBUTING.md         # 贡献指南
-├── CHANGELOG.md            # 变更日志
-├── .gitignore              # Git忽略文件
-├── .flake8                 # 代码风格配置
-├── .pre-commit-config.yaml # 预提交钩子配置
-├── LEGAL.md                # 法律声明
+├── README.md                 # Project documentation
+├── README_zh.md             # Chinese documentation
+├── USAGE.md                 # Usage guide
+├── pyproject.toml           # Project configuration
+├── requirements.txt         # Python dependencies
+├── eval.py                 # Main evaluation script
+├── example_usage.py        # Example usage script
+├── run_eval.sh             # Run script
+├── run_http_eval.sh        # HTTP evaluation script
+├── Makefile                # Build and development commands
+├── CONTRIBUTING.md         # Contribution guidelines
+├── CHANGELOG.md            # Change log
+├── LEGAL.md                # Legal notice
+├── .gitignore              # Git ignore file
+├── .flake8                 # Code style configuration
+├── .pre-commit-config.yaml # Pre-commit hook configuration
+├── .gitattributes          # Git attributes
 │
-├── core/                   # 核心功能模块
-│   ├── __init__.py        # 模块初始化
-│   ├── eval.py            # 主评估逻辑
-│   ├── eval_apis.py       # API评估(暂不支持，建设中)
-│   ├── data.py            # 数据处理
-│   ├── models.py          # 模型定义
-│   └── eval_types.py      # 评估类型定义
+├── core/                   # Core functionality modules
+│   ├── __init__.py        # Module initialization
+│   ├── eval.py            # Main evaluation logic
+│   ├── data.py            # Data processing
+│   ├── eval_types.py      # Evaluation type definitions
+│   ├── logger.py          # Logging functionality
+│   └── models/            # Model implementations
+│       ├── __init__.py    # Models module initialization
+│       ├── api_models.py  # API-based model implementations
+│       └── vllm_models.py # VLLM-based model implementations
 │
-├── config/                 # 配置文件
-│   ├── api_prompt_config_ch.json  # 中文API提示配置
-│   ├── api_prompt_config_en.json  # 英文API提示配置
-│   └── default_prompt_config.json # 默认提示配置
+├── config/                 # Configuration files
+│   ├── api_prompt_config_ch.json  # Chinese API prompt configuration
+│   ├── api_prompt_config_en.json  # English API prompt configuration
+│   └── default_prompt_config.json # Default prompt configuration
 │
-├── utils/                  # 工具函数
-│   ├── __init__.py        # 模块初始化
-│   ├── filter_mutual_right_samples.py  # 过滤相互正确样本
-│   ├── filter_similar_query.py         # 过滤相似查询
-│   └── transfer_csv_to_jsonl.py        # CSV转JSONL工具
+├── utils/                  # Utility functions
+│   ├── __init__.py        # Module initialization
+│   └── transfer_csv_to_jsonl.py  # CSV to JSONL conversion tool
 │
-├── examples/               # 示例脚本
-│   ├── basic_evaluation.py # 基本使用示例
-│   └── export_errors.py    # 错误样本导出示例
+├── examples/               # Example scripts
+│   ├── basic_evaluation.py # Basic usage example
+│   └── export_errors.py    # Error sample export example
 │
-└── tests/                  # 测试文件
-    ├── test_data_process.py    # 数据处理测试
-    ├── test_checkanswer.py     # 答案检查测试
-    └── test.jsonl              # 测试数据
+├── tests/                  # Test files
+│   ├── test_imports.py     # Import test script
+│   ├── test_data_process.py    # Data processing tests
+│   ├── test_checkanswer.py     # Answer checking tests
+│   ├── test_eval.py            # Evaluation tests
+│   └── test_import_models.py   # Model import tests
+│
+├── data/                   # Data files
+│   ├── zh.jsonl           # Chinese evaluation data
+│   └── en.jsonl           # English evaluation data
+│
+├── results/                # Evaluation results (generated)
+│
+└── pic/                    # Images and figures
+    ├── benchmark.jpg       # Benchmark figure
+    └── examples.jpg        # Examples figure
 ```
 
 ## 开发指南
