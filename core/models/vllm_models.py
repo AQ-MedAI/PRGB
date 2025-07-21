@@ -1,11 +1,20 @@
 import re
 from typing import Dict, List, Optional
 
-import requests
 import torch
 from tqdm import tqdm
-from vllm import LLM, SamplingParams
 
+from ..logger import get_logger
+
+logger = get_logger()
+
+# vLLM imports - only imported when this module is used
+try:
+    from vllm import LLM, SamplingParams
+    VLLM_AVAILABLE = True
+except ImportError:
+    VLLM_AVAILABLE = False
+    raise ValueError("vLLM is not installed. Please install it with: pip install vllm")
 
 def transfer_dict_conv(
     inputs: List[str], system: Optional[str] = None
@@ -24,54 +33,13 @@ def transfer_dict_conv(
             )
     return output_chat_dict
 
-
-class OpenAIAPIModel:
-    def __init__(
-        self,
-        api_key,
-        url="https://api.openai.com/v1/completions",
-        model="gpt-3.5-turbo",
-    ):
-        self.url = url
-        self.model = model
-        self.API_KEY = api_key
-
-    def generate(
-        self,
-        text: str,
-        temperature=0.7,
-        system="You are a helpful assistant. You can help me by answering my questions. You can also ask me questions.",
-        top_p=1,
-    ):
-        headers = {"Authorization": f"Bearer {self.API_KEY}"}
-
-        query = {
-            "model": self.model,
-            "temperature": temperature,
-            "top_p": top_p,
-            "messages": [
-                {
-                    "role": "system",
-                    "content": system,
-                },
-                {
-                    "role": "user",
-                    "content": text,
-                },
-            ],
-            "stream": False,
-        }
-        responses = requests.post(self.url, headers=headers, json=query)
-        if "choices" not in responses.json():
-            print(text)
-            print(responses)
-        return responses.json()["choices"][0]["message"]["content"]
-
-
 class CommonModelVllm:
     def __init__(
         self, plm="/mntnlp/common_base_model/Qwen__Qwen2.5-7B-Instruct"
     ):
+        if not VLLM_AVAILABLE:
+            raise ImportError("vLLM is not installed. Please install it with: pip install vllm")
+        
         self.model = LLM(
             model=plm,
             dtype="bfloat16",
@@ -110,7 +78,7 @@ class CommonModelVllm:
                 generate_result.append(output.outputs[0].text)
             torch.cuda.empty_cache()
             if i == 0:
-                print(generate_result[0])
+                logger.info(f"First generated result: {generate_result[0]}")
         return generate_result
 
     def single_generate(self, prompt):
@@ -118,7 +86,7 @@ class CommonModelVllm:
             transfer_dict_conv([prompt]),
             tokenize=False
         )
-        # print("=" * 20, "Direct Ans", "=" * 20)
+        # logger.debug("=" * 20, "Direct Ans", "=" * 20)
         generated_ids = self.model.generate(
             model_inputs, self.sampling_params
         )
@@ -160,7 +128,7 @@ class InferModelVllm(CommonModelVllm):
                 generate_result.append(output.outputs[0].text)
             torch.cuda.empty_cache()
             if i == 0:
-                print(generate_result[0])
+                logger.info(f"First generated result: {generate_result[0]}")
         return generate_result
 
     def extract_anwer(self, answer):
@@ -199,7 +167,7 @@ class Qwen3Vllm(CommonModelVllm):
                 generate_result.append(output.outputs[0].text)
             torch.cuda.empty_cache()
             if i == 0:
-                print(generate_result[0])
+                logger.info(f"First generated result: {generate_result[0]}")
         return generate_result
 
 
@@ -235,5 +203,5 @@ class HiragVllm(CommonModelVllm):
                 generate_result.append(output.outputs[0].text)
             torch.cuda.empty_cache()
             if i == 0:
-                print(generate_result[0])
-        return generate_result
+                logger.info(f"First generated result: {generate_result[0]}")
+        return generate_result 

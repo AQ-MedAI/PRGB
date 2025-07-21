@@ -1,11 +1,11 @@
 import json
-import logging
 import random
 from dataclasses import asdict, dataclass
 from typing import Dict, List, Literal, Tuple
 
-# Configure logger
-logger = logging.getLogger(__name__)
+from .logger import get_logger
+
+logger = get_logger()
 
 
 @dataclass

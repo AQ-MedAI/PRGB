@@ -1,13 +1,13 @@
 import json
-import logging
 from dataclasses import dataclass, field
 from typing import Dict, List, Tuple
 
 import pandas as pd
 from tqdm import tqdm
 
-# Configure logger
-logger = logging.getLogger(__name__)
+from .logger import get_logger
+
+logger = get_logger()
 
 
 @dataclass
