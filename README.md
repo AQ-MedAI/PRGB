@@ -14,7 +14,7 @@ PRGB (Placeholder RAG Benchmark) is a benchmark tool focused on evaluating docum
 
 ### Upcoming Updates
 
-1. **API-based Inference**: Provide inference and verification functionalities based on APIs.
+1. **✅ API-based Inference**: Provide inference and verification functionalities based on APIs.
 2. **Data Quality Improvement**: The dataset is currently undergoing manual verification and will soon have a more accurate version with improved data quality and consistency.
 3. **Retrieval Testing Version**: A version specifically designed for testing retrieval systems is currently under development and will be released soon.
 
@@ -35,30 +35,30 @@ In our experiments, we uniformly set the following configurations:
 
 The table below shows the performance of various state-of-the-art models on Chinese datasets, sorted by Overall score from high to low. **Bold** values indicate the best experimental results, and ***italic bold*** values indicate the second-best experimental results.
 
-| Models                        | Overall | Multi-Level Filter | Composition   | Reasoning     |
-| ----------------------------- | ------- | ------------------ | ------------- | ------------- |
-| `Gemini-2.5-pro-preview`    | 87.33   | **97.92**         | **94.20**    | ***70.18*** |
-| `Claude-3.7-sonnet`         | 85.74   | ***97.62***      | ***90.59*** | **70.39**    |
-| `Gemini-2.5-flash-preview`  | 81.85   | 93.92              | 88.54         | 63.86         |
-| `Qwen3-235B-A22B`           | 80.76   | 94.92              | 88.18         | 60.23         |
-| `Qwen3-30B-A3B`             | 80.45   | 95.87              | 86.11         | 61.42         |
-| `Deepseek-V3(241226)`       | 77.54   | 94.58              | 81.00         | 60.32         |
-| `Qwen3-235B-A22B w/o think` | 75.20   | 91.50              | 79.67         | 57.14         |
-| `Qwen-2.5-MAX`              | 74.43   | 93.25              | 78.28         | 55.37         |
-| `Qwen3-30B-A3B w/o think`   | 71.05   | 91.08              | 72.22         | 54.76         |
-| `Gemma3_27b`                | 70.24   | 73.09              | 92.21         | 50.24         |
-| `Qwen3_32B`                 | 69.69   | 89.75              | 75.74         | 46.70         |
-| `GPT4.1`                    | 66.26   | 89.75              | 71.95         | 41.27         |
-| `Qwen2.5_72B`               | 64.87   | 92.92              | 64.99         | 44.14         |
-| `GPT4o-1120`                | 64.58   | 88.50              | 70.21         | 39.35         |
-| `Gemma3_12b`                | 64.10   | 60.20              | 89.92         | 50.52         |
-| `Qwen3_8B`                  | 63.04   | 86.87              | 67.49         | 39.47         |
-| `Qwen3_32B w/o think`       | 60.73   | 59.53              | 89.50         | 41.30         |
-| `Qwen2.5_32B`               | 58.76   | 92.00              | 51.33         | 44.60         |
-| `Qwen2.5_14B`               | 55.94   | 89.42              | 52.69         | 35.87         |
-| `Qwen2.5_7B`                | 49.31   | 83.29              | 47.47         | 26.92         |
-| `Qwen3_8B w/o think`        | 50.02   | 47.83              | 83.96         | 28.17         |
-| `Gemma3_4b`                 | 47.67   | 37.41              | 78.33         | 39.26         |
+| Models                        | Overall | Multi-Level Filter  | Composition         | Reasoning           |
+| ----------------------------- | ------- | ------------------- | ------------------- | ------------------- |
+| `Gemini-2.5-pro-preview`    | 87.33   | **97.92**     | **94.20**     | ***70.18*** |
+| `Claude-3.7-sonnet`         | 85.74   | ***97.62*** | ***90.59*** | **70.39**     |
+| `Gemini-2.5-flash-preview`  | 81.85   | 93.92               | 88.54               | 63.86               |
+| `Qwen3-235B-A22B`           | 80.76   | 94.92               | 88.18               | 60.23               |
+| `Qwen3-30B-A3B`             | 80.45   | 95.87               | 86.11               | 61.42               |
+| `Deepseek-V3(241226)`       | 77.54   | 94.58               | 81.00               | 60.32               |
+| `Qwen3-235B-A22B w/o think` | 75.20   | 91.50               | 79.67               | 57.14               |
+| `Qwen-2.5-MAX`              | 74.43   | 93.25               | 78.28               | 55.37               |
+| `Qwen3-30B-A3B w/o think`   | 71.05   | 91.08               | 72.22               | 54.76               |
+| `Gemma3_27b`                | 70.24   | 73.09               | 92.21               | 50.24               |
+| `Qwen3_32B`                 | 69.69   | 89.75               | 75.74               | 46.70               |
+| `GPT4.1`                    | 66.26   | 89.75               | 71.95               | 41.27               |
+| `Qwen2.5_72B`               | 64.87   | 92.92               | 64.99               | 44.14               |
+| `GPT4o-1120`                | 64.58   | 88.50               | 70.21               | 39.35               |
+| `Gemma3_12b`                | 64.10   | 60.20               | 89.92               | 50.52               |
+| `Qwen3_8B`                  | 63.04   | 86.87               | 67.49               | 39.47               |
+| `Qwen3_32B w/o think`       | 60.73   | 59.53               | 89.50               | 41.30               |
+| `Qwen2.5_32B`               | 58.76   | 92.00               | 51.33               | 44.60               |
+| `Qwen2.5_14B`               | 55.94   | 89.42               | 52.69               | 35.87               |
+| `Qwen2.5_7B`                | 49.31   | 83.29               | 47.47               | 26.92               |
+| `Qwen3_8B w/o think`        | 50.02   | 47.83               | 83.96               | 28.17               |
+| `Gemma3_4b`                 | 47.67   | 37.41               | 78.33               | 39.26               |
 
 ### English Dataset Performance Comparison
 

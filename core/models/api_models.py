@@ -11,7 +11,6 @@ from typing import Dict, List, Optional
 import requests
 from tqdm import tqdm
 
-# 使用统一的日志管理器
 from ..logger import get_logger
 
 logger = get_logger()
@@ -23,9 +22,6 @@ try:
 except ImportError:
     OPENAI_AVAILABLE = False
     logger.warning("OpenAI is not installed. Please install it with: pip install openai")
-
-# 移除模块级别的API_KEY读取，改为在需要时读取
-# API_KEY = os.getenv("API_KEY")
 
 def get_api_key():
     """获取API密钥，支持运行时读取环境变量"""
@@ -51,7 +47,7 @@ def transfer_dict_conv(
 class APIInferenceBase:
     def __init__(
         self,
-        url="https://api.openai.com/v1/chat/completions",  # 修改为正确的chat completions端点
+        url="https://api.openai.com/v1/chat/completions",
         api_key=None,
         model="gpt-3.5-turbo",
         inference_mode=False,
@@ -75,15 +71,12 @@ class APIInferenceBase:
         """
         判断是否应该重试
         """
-        # 网络相关错误
         if isinstance(exception, (requests.exceptions.ConnectionError, 
                                 requests.exceptions.Timeout,
                                 requests.exceptions.RequestException)):
             return True
         
-        # HTTP状态码错误
         if response is not None:
-            # 5xx服务器错误
             if response.status_code != 200:
                 return True
         
@@ -102,26 +95,20 @@ class APIInferenceBase:
                     # 第一次尝试，直接调用
                     return func(*args, **kwargs)
                 else:
-                    # 重试前等待
+                    # 重试前等待,增加延迟时间（指数退避）
                     time.sleep(delay)
-                    # 增加延迟时间（指数退避）
                     delay *= self.retry_backoff
-                    # 添加一些随机性避免惊群效应
                     delay += random.uniform(0, 0.1 * delay)
                     
             except Exception as e:
                 last_exception = e
-                
-                # 检查是否应该重试
                 should_retry = self._should_retry(e)
                 
                 if not should_retry or attempt == self.max_retries:
-                    # 不重试或已达到最大重试次数
                     raise last_exception
                 
                 logger.warning(f"API调用失败，第{attempt + 1}次重试: {str(e)}")
         
-        # 如果所有重试都失败了
         raise last_exception
 
     def batch_generate(
@@ -145,13 +132,11 @@ class APIInferenceBase:
             'lock': threading.Lock()
         }
         self.session = requests.Session()
-        # 使用字典来保持输入和输出的对应关系
         self.results = {}
         self.results_lock = threading.Lock()
         self.pbar = tqdm(total=len(data), desc="Processing API Requests")
         self.stop_event = threading.Event()
         
-        # QPS控制相关 - 使用令牌桶算法
         self.qps = batch_size
         self.tokens = batch_size  # 初始令牌数
         self.last_refill = time.time()
@@ -160,8 +145,7 @@ class APIInferenceBase:
         # 将查询请求放入队列，同时保存索引
         for i, item in enumerate(data):
             self.queue.put((i, item))
-            
-        # 运行批量处理
+
         return self.run_batch(temperature, top_p, batch_size)  
 
     def acquire_token(self):
@@ -215,7 +199,7 @@ class APIInferenceBase:
                 except Exception as e:
                     with self.results_lock:
                         self.results[index] = f"Error: {str(e)}"
-                    logger.error(f"线程 {thread_id} 请求 {index} 失败: {messages} - {str(e)}")
+                    logger.error(f"线程 {thread_id} 请求 {index} 失败: {messages[-1]['content'][-20:]} - {str(e)}")
                 
                 response_time = time.time() - start_time
 
@@ -223,10 +207,9 @@ class APIInferenceBase:
                     if success:
                         self.stats['success'] += 1
                         self.stats['total_time'] += response_time
+                        self.pbar.update(1)
                     else:
-                        self.stats['fail'] += 1
-                    
-                    self.pbar.update(1)  # 更新进度条
+                        self.stats['fail'] += 1                    
 
                 self.queue.task_done()
             except Exception as e:
@@ -242,30 +225,25 @@ class APIInferenceBase:
         """
         start_time = time.time()
         
-        # 计算线程数量 - 修复计算逻辑
         data_size = self.stats['total']
-        # 根据数据量和QPS计算合适的线程数
-        max_workers = min(data_size, max(1, min(10, qps * 2)))  # 最多10个线程，最少1个
+        max_workers = min(data_size, max(1, min(10, qps * 2)))
         
         logger.debug(f"启动批量处理: 数据量={data_size}, QPS={qps}, 线程数={max_workers}")
 
         # 创建线程池
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            # 启动工作线程
             workers = [executor.submit(self.worker, temperature, top_p) for _ in range(max_workers)]
 
-            # 等待所有任务完成
             self.queue.join()
 
             # 发送结束信号
             for _ in range(max_workers):
                 self.queue.put(None)
 
-            self.stop_event.set()  # 通知所有工作线程退出
+            self.stop_event.set()
 
-        self.pbar.close()  # 关闭进度条
+        self.pbar.close()
         
-        # 按原始顺序返回结果
         results = []
         for i in range(data_size):
             if i in self.results:
@@ -319,7 +297,7 @@ class OpenAIModel(APIInferenceBase):
         api_key=None,
         model="gpt-3.5-turbo",
         inference_mode=False,
-        max_retries=3,
+        max_retries=20,
         retry_delay=1.0,
         retry_backoff=2.0,
     ):
