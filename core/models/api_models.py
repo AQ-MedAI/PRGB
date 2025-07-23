@@ -51,7 +51,7 @@ class APIInferenceBase:
         api_key=None,
         model="gpt-3.5-turbo",
         inference_mode=False,
-        max_retries=3,
+        max_retries=10,
         retry_delay=1.0,
         retry_backoff=2.0,
     ):
@@ -73,8 +73,21 @@ class APIInferenceBase:
         """
         if isinstance(exception, (requests.exceptions.ConnectionError, 
                                 requests.exceptions.Timeout,
-                                requests.exceptions.RequestException)):
+                                requests.exceptions.RequestException,
+                                requests.exceptions.HTTPError)):
             return True
+        # 对于 HTTPError，检查状态码
+        if isinstance(exception, requests.exceptions.HTTPError) or isinstance(exception, openai.RateLimitError):
+            # 尝试从异常中提取状态码
+            try:
+                # HTTPError 通常包含状态码信息
+                if hasattr(exception, 'response') and exception.response is not None:
+                    status_code = exception.response.status_code
+                    # 5xx 错误和某些 4xx 错误应该重试
+                    if status_code >= 500 or status_code in [408, 429, 502, 503, 504]:
+                        return True
+            except:
+                pass
         
         if response is not None:
             if response.status_code != 200:
@@ -93,18 +106,27 @@ class APIInferenceBase:
             try:
                 if attempt == 0:
                     # 第一次尝试，直接调用
+                    logger.debug(f"API调用第1次尝试")
                     return func(*args, **kwargs)
                 else:
                     # 重试前等待,增加延迟时间（指数退避）
+                    if attempt % 5 == 0:
+                        logger.info(f"API调用失败，等待 {delay:.2f}s 后进行第{attempt + 1}次重试")
                     time.sleep(delay)
                     delay *= self.retry_backoff
                     delay += random.uniform(0, 0.1 * delay)
+                    logger.debug(f"API调用第{attempt + 1}次尝试")
+                    return func(*args, **kwargs)
                     
             except Exception as e:
                 last_exception = e
                 should_retry = self._should_retry(e)
                 
+                logger.debug(f"API调用异常: {type(e).__name__}: {str(e)}")
+                logger.debug(f"是否应该重试: {should_retry}")
+                
                 if not should_retry or attempt == self.max_retries:
+                    logger.error(f"API调用最终失败，不再重试: {str(e)}")
                     raise last_exception
                 
                 logger.warning(f"API调用失败，第{attempt + 1}次重试: {str(e)}")
@@ -136,6 +158,10 @@ class APIInferenceBase:
         self.results_lock = threading.Lock()
         self.pbar = tqdm(total=len(data), desc="Processing API Requests")
         self.stop_event = threading.Event()
+        
+        # 添加重试计数器
+        self.retry_counts = {}
+        self.retry_counts_lock = threading.Lock()
         
         self.qps = batch_size
         self.tokens = batch_size  # 初始令牌数
@@ -196,10 +222,34 @@ class APIInferenceBase:
                         self.results[index] = result
                     success = True
                     logger.debug(f"线程 {thread_id} 请求 {index} 成功，耗时: {time.time() - start_time:.2f}s")
+                    should_retry = False
                 except Exception as e:
-                    with self.results_lock:
-                        self.results[index] = f"Error: {str(e)}"
-                    logger.error(f"线程 {thread_id} 请求 {index} 失败: {messages[-1]['content'][-20:]} - {str(e)}")
+                    # 检查是否是可重试的异常
+                    should_retry = self._should_retry(e)
+                    current_retries = 0  # 初始化重试次数
+                    
+                    if should_retry:
+                        # 检查重试次数
+                        with self.retry_counts_lock:
+                            current_retries = self.retry_counts.get(index, 0)
+                            if current_retries < self.max_retries:
+                                self.retry_counts[index] = current_retries + 1
+                                logger.warning(f"线程 {thread_id} 请求 {index} 遇到可重试异常，第{current_retries + 1}次重试: {str(e)}")
+                                # 将请求重新放回队列进行重试
+                                self.queue.put((index, messages))
+                                # 不调用 task_done()，因为任务还没有完成
+                                continue  # 继续处理下一个请求
+                            else:
+                                logger.error(f"线程 {thread_id} 请求 {index} 重试次数已达上限({self.max_retries})，放弃重试: {str(e)}")
+                                with self.results_lock:
+                                    self.results[index] = f"Error: Max retries exceeded - {str(e)}"
+                                success = False
+                    else:
+                        # 不可重试的异常，记录错误
+                        with self.results_lock:
+                            self.results[index] = f"Error: {str(e)}"
+                        logger.error(f"线程 {thread_id} 请求 {index} 遇到不可重试异常: {messages[-1]['content'][-20:]} - {str(e)}")
+                        success = False
                 
                 response_time = time.time() - start_time
 
@@ -211,7 +261,9 @@ class APIInferenceBase:
                     else:
                         self.stats['fail'] += 1                    
 
-                self.queue.task_done()
+                # 只有在不重试的情况下才调用 task_done()
+                if not should_retry or (should_retry and current_retries >= self.max_retries):
+                    self.queue.task_done()
             except Exception as e:
                 if not self.queue.empty():
                     logger.error(f"Worker线程 {thread_id} 异常: {str(e)}")
