@@ -1,5 +1,13 @@
 .PHONY: help install install-dev test lint format clean docs test-imports
 
+# Default values for evaluation parameters
+MODEL_NAME ?= Qwen3
+MODEL_NAME ?= Qwen3_infer
+BATCH_SIZE ?= 16
+DATA_PATH_ZH ?= data/zh.jsonl
+DATA_PATH_EN ?= data/en.jsonl
+OUTPUT_PATH ?= ./results
+
 # Default target
 help:
 	@echo "PRGB - RAG System Evaluation Tool"
@@ -25,11 +33,24 @@ help:
 	@echo "  export EVAL_MODEL_PATH=/path/to/your/model && make eval"
 	@echo "  EVAL_MODEL_PATH=/path/to/your/model make eval"
 	@echo "  EVAL_MODEL_PATH=/path/to/your/model make eval-ch"
+	@echo "  EVAL_MODEL_PATH=/path/to/your/model MODEL_NAME=Qwen2.5 make eval-ch"
 	@echo "  EVAL_MODEL_PATH=/path/to/your/model make eval-ch-infer"
 	@echo "  EVAL_MODEL_PATH=/path/to/your/model make eval-en"
 	@echo "  EVAL_MODEL_PATH=/path/to/your/model make eval-en-infer"
 	@echo "  EVAL_RESULT_FILE=results/model_eval_result.jsonl make export-errors"
 	@echo ""
+	@echo "Default values:"
+	@echo "  MODEL_NAME=$(MODEL_NAME)"
+	@echo "  MODEL_NAME=$(MODEL_NAME)"
+	@echo "  BATCH_SIZE=$(BATCH_SIZE)"
+	@echo "  DATA_PATH_ZH=$(DATA_PATH_ZH)"
+	@echo "  DATA_PATH_EN=$(DATA_PATH_EN)"
+	@echo "  OUTPUT_PATH=$(OUTPUT_PATH)"
+	@echo ""
+	@echo "You can override defaults:"
+	@echo "  MODEL_NAME=Qwen2.5 make eval-ch"
+	@echo "  BATCH_SIZE=8 make eval-ch"
+	@echo "  EVAL_MODEL_PATH=/path/to/model MODEL_NAME=Gemma3 BATCH_SIZE=32 make eval-ch"
 
 # Installation
 install:
@@ -85,18 +106,20 @@ eval:
 		exit 1; \
 	fi
 	@echo "Using model path: $(EVAL_MODEL_PATH)"
+	@echo "Using model name: $(MODEL_NAME)"
+	@echo "Using batch size: $(BATCH_SIZE)"
 	python eval.py \
-		--model-name "Qwen3" \
+		--model-name "$(MODEL_NAME)" \
 		--model-path "$(EVAL_MODEL_PATH)" \
-		--data-path "data/zh.jsonl" \
-		--output-path "./results" \
-		--batch-size 16
+		--data-path "$(DATA_PATH_ZH)" \
+		--output-path "$(OUTPUT_PATH)" \
+		--batch-size $(BATCH_SIZE)
 	python eval.py \
-		--model-name "Qwen3" \
+		--model-name "$(MODEL_NAME)" \
 		--model-path "$(EVAL_MODEL_PATH)" \
-		--data-path "data/en.jsonl" \
-		--output-path "./results" \
-		--batch-size 16
+		--data-path "$(DATA_PATH_EN)" \
+		--output-path "$(OUTPUT_PATH)" \
+		--batch-size $(BATCH_SIZE)
 
 # Chinese evaluation (requires GPU)
 # Usage: make eval-ch (requires EVAL_MODEL_PATH environment variable)
@@ -110,13 +133,15 @@ eval-ch:
 		exit 1; \
 	fi
 	@echo "Using model path: $(EVAL_MODEL_PATH)"
-	@echo "Using Chinese data: data/zh.jsonl"
+	@echo "Using model name: $(MODEL_NAME)"
+	@echo "Using Chinese data: $(DATA_PATH_ZH)"
+	@echo "Using batch size: $(BATCH_SIZE)"
 	python eval.py \
-		--model-name "Qwen3" \
+		--model-name "$(MODEL_NAME)" \
 		--model-path "$(EVAL_MODEL_PATH)" \
-		--data-path "data/zh.jsonl" \
-		--output-path "./results" \
-		--batch-size 16
+		--data-path "$(DATA_PATH_ZH)" \
+		--output-path "$(OUTPUT_PATH)" \
+		--batch-size $(BATCH_SIZE)
 
 # Chinese evaluation in inference mode (requires GPU)
 # Usage: make eval-ch-infer (requires EVAL_MODEL_PATH environment variable)
@@ -130,15 +155,17 @@ eval-ch-infer:
 		exit 1; \
 	fi
 	@echo "Using model path: $(EVAL_MODEL_PATH)"
-	@echo "Using Chinese data: data/zh.jsonl"
-	@echo "Running in inference mode with Qwen3_infer model"
+	@echo "Using model name: $(MODEL_NAME)"
+	@echo "Using Chinese data: $(DATA_PATH_ZH)"
+	@echo "Using batch size: $(BATCH_SIZE)"
+	@echo "Running in inference mode with $(MODEL_NAME) model"
 	python eval.py \
-		--model-name "Qwen3_infer" \
+		--model-name "$(MODEL_NAME)" \
 		--model-path "$(EVAL_MODEL_PATH)" \
 		--inference-mode true \
-		--data-path "data/zh.jsonl" \
-		--output-path "./results" \
-		--batch-size 16
+		--data-path "$(DATA_PATH_ZH)" \
+		--output-path "$(OUTPUT_PATH)" \
+		--batch-size $(BATCH_SIZE)
 
 # English evaluation (requires GPU)
 # Usage: make eval-en (requires EVAL_MODEL_PATH environment variable)
@@ -152,13 +179,15 @@ eval-en:
 		exit 1; \
 	fi
 	@echo "Using model path: $(EVAL_MODEL_PATH)"
-	@echo "Using English data: data/en.jsonl"
+	@echo "Using model name: $(MODEL_NAME)"
+	@echo "Using English data: $(DATA_PATH_EN)"
+	@echo "Using batch size: $(BATCH_SIZE)"
 	python eval.py \
-		--model-name "Qwen3_infer" \
+		--model-name "$(MODEL_NAME)" \
 		--model-path "$(EVAL_MODEL_PATH)" \
-		--data-path "data/en.jsonl" \
-		--output-path "./results" \
-		--batch-size 16
+		--data-path "$(DATA_PATH_EN)" \
+		--output-path "$(OUTPUT_PATH)" \
+		--batch-size $(BATCH_SIZE)
 
 # English evaluation in inference mode (requires GPU)
 # Usage: make eval-en-infer (requires EVAL_MODEL_PATH environment variable)
@@ -172,24 +201,28 @@ eval-en-infer:
 		exit 1; \
 	fi
 	@echo "Using model path: $(EVAL_MODEL_PATH)"
-	@echo "Using English data: data/en.jsonl"
-	@echo "Running in inference mode with Qwen3_infer model"
+	@echo "Using model name: $(MODEL_NAME)"
+	@echo "Using English data: $(DATA_PATH_EN)"
+	@echo "Using batch size: $(BATCH_SIZE)"
+	@echo "Running in inference mode with $(MODEL_NAME) model"
 	python eval.py \
-		--model-name "Qwen3_infer" \
+		--model-name "$(MODEL_NAME)" \
 		--model-path "$(EVAL_MODEL_PATH)" \
 		--inference-mode true \
-		--data-path "data/en.jsonl" \
-		--output-path "./results" \
-		--batch-size 16
+		--data-path "$(DATA_PATH_EN)" \
+		--output-path "$(OUTPUT_PATH)" \
+		--batch-size $(BATCH_SIZE)
 
 # Quick evaluation with test data
 eval-test:
 	@echo "Running evaluation with test data..."
+	@echo "Using model name: test"
+	@echo "Using batch size: 1"
 	python eval.py \
 		--model-name "test" \
 		--model-path "test" \
 		--data-path "tests/test.jsonl" \
-		--output-path "./results" \
+		--output-path "$(OUTPUT_PATH)" \
 		--batch-size 1 \
 		--temperature 0.7
 

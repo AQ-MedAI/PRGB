@@ -1,15 +1,12 @@
 import argparse
 import json
-import logging
 from typing import List, Tuple
 
 from .data import DataPreprocess
 from .eval_types import EvalResult, EvalResults
-from .models import CommonModelVllm, InferModelVllm, Qwen3Vllm
+from .logger import get_logger
 
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
-)
+logger = get_logger()
 
 
 def checkanswer_acc(
@@ -124,14 +121,27 @@ def get_eval(args):
             )
 
     # 采样
-    # ragdata.data = ragdata.data[:5]
-    if not args.inference_mode:
-        if "qwen3" in model_name.lower():
-            model = Qwen3Vllm(plm=model_path, think_mode=False)
+    # ragdata.data = ragdata.data[:1]
+    if "http" in model_path:
+        import importlib.util
+        if importlib.util.find_spec("openai") is None:
+            from .models import APIModel
+            model = APIModel(url=model_path, model=model_name, api_key=args.api_key, inference_mode=args.inference_mode)
         else:
-            model = CommonModelVllm(plm=model_path)
+            from .models import OpenAIModel
+            model = OpenAIModel(url=model_path, model=model_name, api_key=args.api_key, inference_mode=args.inference_mode)
+
     else:
-        model = InferModelVllm(plm=model_path)
+        if not args.inference_mode:
+            if "qwen3" in model_name.lower():
+                from .models import Qwen3Vllm
+                model = Qwen3Vllm(plm=model_path, think_mode=False)
+            else:
+                from .models import CommonModelVllm
+                model = CommonModelVllm(plm=model_path)
+        else:
+            from .models import InferModelVllm
+            model = InferModelVllm(plm=model_path)
 
     prompts = []
     answers = []
@@ -176,6 +186,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
+        "--api-key", type=str, default=None, help="api key of api models"
+    )
+    parser.add_argument(
         "--model-name", type=str, default="Qwen", help="model name"
     )
     parser.add_argument(
@@ -188,13 +201,13 @@ if __name__ == "__main__":
         help="evaluetion dataset",
     )
     parser.add_argument(
-        "--model-path", type=str, default="", help="api key of chatgpt"
+        "--model-path", type=str, default="", help="api key of api models or local model path"
     )
     parser.add_argument(
-        "--nosie_passages_num", type=int, default=3, help="name of plm"
+        "--nosie_passages_num", type=int, default=3, help="number of noisy passages"
     )
     parser.add_argument(
-        "--output_path", type=str, default="./", help="url of chatgpt"
+        "--output_path", type=str, default="./", help="output path"
     )
     parser.add_argument(
         "--custom_config",

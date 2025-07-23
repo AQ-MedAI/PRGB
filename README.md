@@ -14,7 +14,7 @@ PRGB (Placeholder RAG Benchmark) is a benchmark tool focused on evaluating docum
 
 ### Upcoming Updates
 
-1. **API-based Inference**: Provide inference and verification functionalities based on APIs.
+1. **✅ API-based Inference**: Provide inference and verification functionalities based on APIs.
 2. **Data Quality Improvement**: The dataset is currently undergoing manual verification and will soon have a more accurate version with improved data quality and consistency.
 3. **Retrieval Testing Version**: A version specifically designed for testing retrieval systems is currently under development and will be released soon.
 
@@ -35,57 +35,61 @@ In our experiments, we uniformly set the following configurations:
 
 The table below shows the performance of various state-of-the-art models on Chinese datasets, sorted by Overall score from high to low. **Bold** values indicate the best experimental results, and ***italic bold*** values indicate the second-best experimental results.
 
-| Models                        | Overall | Multi-Level Filter | Composition   | Reasoning     |
-| ----------------------------- | ------- | ------------------ | ------------- | ------------- |
-| `Gemini-2.5-pro-preview`    | 87.33   | **97.92**         | **94.20**    | ***70.18*** |
-| `Claude-3.7-sonnet`         | 85.74   | ***97.62***      | ***90.59*** | **70.39**    |
-| `Gemini-2.5-flash-preview`  | 81.85   | 93.92              | 88.54         | 63.86         |
-| `Qwen3-235B-A22B`           | 80.76   | 94.92              | 88.18         | 60.23         |
-| `Qwen3-30B-A3B`             | 80.45   | 95.87              | 86.11         | 61.42         |
-| `Deepseek-V3(241226)`       | 77.54   | 94.58              | 81.00         | 60.32         |
-| `Qwen3-235B-A22B w/o think` | 75.20   | 91.50              | 79.67         | 57.14         |
-| `Qwen-2.5-MAX`              | 74.43   | 93.25              | 78.28         | 55.37         |
-| `Qwen3-30B-A3B w/o think`   | 71.05   | 91.08              | 72.22         | 54.76         |
-| `Gemma3_27b`                | 70.24   | 73.09              | 92.21         | 50.24         |
-| `Qwen3_32B`                 | 69.69   | 89.75              | 75.74         | 46.70         |
-| `GPT4.1`                    | 66.26   | 89.75              | 71.95         | 41.27         |
-| `Qwen2.5_72B`               | 64.87   | 92.92              | 64.99         | 44.14         |
-| `GPT4o-1120`                | 64.58   | 88.50              | 70.21         | 39.35         |
-| `Gemma3_12b`                | 64.10   | 60.20              | 89.92         | 50.52         |
-| `Qwen3_8B`                  | 63.04   | 86.87              | 67.49         | 39.47         |
-| `Qwen3_32B w/o think`       | 60.73   | 59.53              | 89.50         | 41.30         |
-| `Qwen2.5_32B`               | 58.76   | 92.00              | 51.33         | 44.60         |
-| `Qwen2.5_14B`               | 55.94   | 89.42              | 52.69         | 35.87         |
-| `Qwen2.5_7B`                | 49.31   | 83.29              | 47.47         | 26.92         |
-| `Qwen3_8B w/o think`        | 50.02   | 47.83              | 83.96         | 28.17         |
-| `Gemma3_4b`                 | 47.67   | 37.41              | 78.33         | 39.26         |
+| Models                        | Overall | Multi-Level Filter  | Composition         | Reasoning       |
+| ----------------------------- | ------- | ------------------- | ------------------- | --------------- |
+| `Gemini-2.5-pro-preview`    | 87.33   | **97.92**     | **94.20**     | 70.18           |
+| `DeepSeek-R1-0528`          | 86.68   | 96.17               | ***93.69*** | **72.79** |
+| `Claude-3.7-sonnet`         | 85.74   | ***97.62*** | 90.59               | **70.39** |
+| `Gemini-2.5-flash-preview`  | 81.85   | 93.92               | 88.54               | 63.86           |
+| `Qwen3-235B-A22B`           | 80.76   | 94.92               | 88.18               | 60.23           |
+| `Qwen3-30B-A3B`             | 80.45   | 95.87               | 86.11               | 61.42           |
+| `Deepseek-V3(241226)`       | 77.54   | 94.58               | 81.00               | 60.32           |
+| `Qwen3-235B-A22B w/o think` | 75.20   | 91.50               | 79.67               | 57.14           |
+| `Qwen-2.5-MAX`              | 74.43   | 93.25               | 78.28               | 55.37           |
+| `Qwen3-30B-A3B w/o think`   | 71.05   | 91.08               | 72.22               | 54.76           |
+| `Gemma3_27b`                | 70.24   | 73.09               | 92.21               | 50.24           |
+| `Qwen3_32B`                 | 69.69   | 89.75               | 75.74               | 46.70           |
+| `Hunyuan-80B-A13B`          | 68.84   | 93.50               | 68.94               | 50.64           |
+| `GPT4.1`                    | 66.26   | 89.75               | 71.95               | 41.27           |
+| `Qwen2.5_72B`               | 64.87   | 92.92               | 64.99               | 44.14           |
+| `GPT4o-1120`                | 64.58   | 88.50               | 70.21               | 39.35           |
+| `Gemma3_12b`                | 64.10   | 60.20               | 89.92               | 50.52           |
+| `Qwen3_8B`                  | 63.04   | 86.87               | 67.49               | 39.47           |
+| `Qwen3_32B w/o think`       | 60.73   | 59.53               | 89.50               | 41.30           |
+| `Qwen2.5_32B`               | 58.76   | 92.00               | 51.33               | 44.60           |
+| `Qwen2.5_14B`               | 55.94   | 89.42               | 52.69               | 35.87           |
+| `Qwen2.5_7B`                | 49.31   | 83.29               | 47.47               | 26.92           |
+| `Qwen3_8B w/o think`        | 50.02   | 47.83               | 83.96               | 28.17           |
+| `Gemma3_4b`                 | 47.67   | 37.41               | 78.33               | 39.26           |
 
 ### English Dataset Performance Comparison
 
 The table below shows the performance of various state-of-the-art models on English datasets, sorted by Overall score from high to low. **Bold** values indicate the best experimental results, and ***italic bold*** values indicate the second-best experimental results.
 
-| Models                       | Overall             | Multi-Level Filter  | Composition         | Reasoning           |
-| ---------------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `Gemini-2.5-pro-preview`   | **84.89**     | **94.89**     | ***85.32*** | ***76.09*** |
-| `Claude-3.7-sonnet`        | ***82.96*** | ***93.18*** | 82.13               | **76.51**     |
-| `Gemini-2.5-flash-preview` | 79.20               | 90.69               | 80.30               | 67.90               |
-| `Gemma3_27b`               | 79.18               | 92.03               | 78.00               | 71.33               |
-| `Qwen3-30B-A3B`            | 79.09               | 78.01               | **91.01**     | 71.78               |
-| `Deepseek-V3(241226)`      | 79.02               | 89.91               | 77.18               | 74.03               |
-| `Qwen-3-235B-A22B`         | 78.68               | 90.56               | 78.32               | 69.97               |
-| `Qwen-2.5-MAX`             | 78.45               | 89.32               | 75.83               | 65.89               |
-| `Qwen3_32B`                | 78.05               | 90.69               | 77.23               | 69.65               |
-| `Qwen3_8B`                 | 76.80               | 88.36               | 76.27               | 68.71               |
-| `Gemma3_12b`               | 72.35               | 87.42               | 68.46               | 68.12               |
-| `Qwen2.5_72B`              | 68.90               | 87.01               | 64.30               | 63.69               |
-| `Qwen3_32B w/o think`      | 68.30               | 84.35               | 63.74               | 64.59               |
-| `Qwen2.5_32B`              | 66.70               | 85.66               | 63.04               | 58.92               |
-| `Qwen2.5_14B`              | 63.29               | 84.40               | 57.35               | 58.34               |
-| `Qwen2.5_7B`               | 63.16               | 81.90               | 56.76               | 61.00               |
-| `Qwen3_8B w/o think`       | 64.71               | 83.21               | 58.93               | 61.52               |
-| `GPT4o-1120`               | 60.89               | 81.62               | 60.69               | 44.83               |
-| `GPT4.1`                   | 60.79               | 84.76               | 64.02               | 35.37               |
-| `Gemma3_4b`                | 57.58               | 77.98               | 48.50               | 59.41               |
+| Models                        | Overall             | Multi-Level Filter  | Composition         | Reasoning           |
+| ----------------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| `Gemini-2.5-pro-preview`    | **84.89**     | **94.89**     | ***85.32*** | ***76.09*** |
+| `Claude-3.7-sonnet`         | ***82.96*** | ***93.18*** | 82.13               | **76.51**     |
+| `Gemini-2.5-flash-preview`  | 79.20               | 90.69               | 80.30               | 67.90               |
+| `Gemma3_27b`                | 79.18               | 92.03               | 78.00               | 71.33               |
+| `Qwen3-30B-A3B`             | 79.09               | 91.01               | **78.01**     | 71.78               |
+| `Deepseek-V3(241226)`       | 79.02               | 89.91               | 77.18               | 74.03               |
+| `Qwen-3-235B-A22B`          | 78.68               | 90.56               | 78.32               | 69.97               |
+| `Qwen-2.5-MAX`              | 78.45               | 89.32               | 75.83               | 65.89               |
+| `Qwen3_32B`                 | 78.05               | 90.69               | 77.23               | 69.65               |
+| `Qwen3_8B`                  | 76.80               | 88.36               | 76.27               | 68.71               |
+| `Gemma3_12b`                | 72.35               | 87.42               | 68.46               | 68.12               |
+| `Qwen3-235B-A22B w/o think` | 70.27               | 83.95               | 66.37               | 67.15               |
+| `Qwen2.5_72B`               | 68.90               | 87.01               | 64.30               | 63.69               |
+| `Qwen3_32B w/o think`       | 68.30               | 84.35               | 63.74               | 64.59               |
+| `Qwen2.5_32B`               | 66.70               | 85.66               | 63.04               | 58.92               |
+| `Qwen3-30B-A3B w/o think`   | 65.38               | 84.76               | 61.12               | 58.47               |
+| `Qwen2.5_14B`               | 63.29               | 84.40               | 57.35               | 58.34               |
+| `Qwen2.5_7B`                | 63.16               | 81.90               | 56.76               | 61.00               |
+| `Qwen3_8B w/o think`        | 64.71               | 83.21               | 58.93               | 61.52               |
+| `GPT4o-1120`                | 60.89               | 81.62               | 60.69               | 44.83               |
+| `GPT4.1`                    | 60.79               | 84.76               | 64.02               | 35.37               |
+| `Gemma3_4b`                 | 57.58               | 77.98               | 48.50               | 59.41               |
 
 ## Installation
 
@@ -287,26 +291,32 @@ python examples/export_errors.py
 PRGB/
 ├── README.md                 # Project documentation
 ├── README_zh.md             # Chinese documentation
+├── USAGE.md                 # Usage guide
 ├── pyproject.toml           # Project configuration
 ├── requirements.txt         # Python dependencies
 ├── eval.py                 # Main evaluation script
-├── test_imports.py         # Import test script
+├── example_usage.py        # Example usage script
 ├── run_eval.sh             # Run script
+├── run_http_eval.sh        # HTTP evaluation script
 ├── Makefile                # Build and development commands
 ├── CONTRIBUTING.md         # Contribution guidelines
 ├── CHANGELOG.md            # Change log
+├── LEGAL.md                # Legal notice
 ├── .gitignore              # Git ignore file
 ├── .flake8                 # Code style configuration
 ├── .pre-commit-config.yaml # Pre-commit hook configuration
-├── LEGAL.md                # Legal notice
+├── .gitattributes          # Git attributes
 │
 ├── core/                   # Core functionality modules
 │   ├── __init__.py        # Module initialization
 │   ├── eval.py            # Main evaluation logic
-│   ├── eval_apis.py       # API evaluation(PENDING)
 │   ├── data.py            # Data processing
-│   ├── models.py          # Model definitions
-│   └── eval_types.py      # Evaluation type definitions
+│   ├── eval_types.py      # Evaluation type definitions
+│   ├── logger.py          # Logging functionality
+│   └── models/            # Model implementations
+│       ├── __init__.py    # Models module initialization
+│       ├── api_models.py  # API-based model implementations
+│       └── vllm_models.py # VLLM-based model implementations
 │
 ├── config/                 # Configuration files
 │   ├── api_prompt_config_ch.json  # Chinese API prompt configuration
@@ -315,18 +325,28 @@ PRGB/
 │
 ├── utils/                  # Utility functions
 │   ├── __init__.py        # Module initialization
-│   ├── filter_mutual_right_samples.py  # Filter mutually correct samples
-│   ├── filter_similar_query.py         # Filter similar queries
-│   └── transfer_csv_to_jsonl.py        # CSV to JSONL conversion tool
+│   └── transfer_csv_to_jsonl.py  # CSV to JSONL conversion tool
 │
 ├── examples/               # Example scripts
 │   ├── basic_evaluation.py # Basic usage example
 │   └── export_errors.py    # Error sample export example
 │
-└── tests/                  # Test files
-    ├── test_data_process.py    # Data processing tests
-    ├── test_checkanswer.py     # Answer checking tests
-    └── test.jsonl              # Test data
+├── tests/                  # Test files
+│   ├── test_imports.py     # Import test script
+│   ├── test_data_process.py    # Data processing tests
+│   ├── test_checkanswer.py     # Answer checking tests
+│   ├── test_eval.py            # Evaluation tests
+│   └── test_import_models.py   # Model import tests
+│
+├── data/                   # Data files
+│   ├── zh.jsonl           # Chinese evaluation data
+│   └── en.jsonl           # English evaluation data
+│
+├── results/                # Evaluation results (generated)
+│
+└── pic/                    # Images and figures
+    ├── benchmark.jpg       # Benchmark figure
+    └── examples.jpg        # Examples figure
 ```
 
 ## Development Guide

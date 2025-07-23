@@ -7,7 +7,6 @@ This script provides the main entry point for RAG system evaluation.
 
 import argparse
 import json
-import logging
 import sys
 from pathlib import Path
 
@@ -15,13 +14,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 from core import get_eval
+from core.logger import get_logger, set_verbose
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-logger = logging.getLogger(__name__)
+logger = get_logger()
 
 
 def main():
@@ -43,6 +38,9 @@ Examples:
     )
 
     # Model configuration
+    parser.add_argument(
+        "--api-key", type=str, default=None, help="api key of chatgpt"
+    )
     parser.add_argument(
         "--model-name",
         type=str,
@@ -123,7 +121,7 @@ Examples:
 
     # Set logging level
     if args.verbose:
-        logging.getLogger().setLevel(logging.DEBUG)
+        set_verbose(True)
 
     # Validate arguments
     try:

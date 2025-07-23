@@ -4,15 +4,15 @@
 
 PRGB (Placeholder RAG Benchmark) 是一个专注于评估检索增强生成（RAG）系统中文档忠实性与外部知识利用效率的基准工具。它通过多级过滤、跨实体推理等渐进维度，以及配备噪声文档的数据集，使用placeholders全面评测模型性能，助力研究人员和开发者分析主流RAG模型在复杂场景中的表现。
 
-![benchmark](png/benchmark.png)
+![benchmark](pic/benchmark.jpg)
 
 ### 样例数据
 
-![data](png/examples.jpg)
+![data](pic/examples.jpg)
 
 ### 即将更新
 
-1. **基于API的推理**：提供基于API的推理以及检验功能
+1. **✅ 基于API的推理**：提供基于API的推理以及检验功能
 2. **数据质量提升**: 数据集正在经过人工校验中，很快会有更准确的版本，提供改进的数据质量和一致性。
 3. **检索测试版本**: 专门用于测试检索系统的版本正在开发中，即将发布。
 
@@ -30,30 +30,30 @@ PRGB (Placeholder RAG Benchmark) 是一个专注于评估检索增强生成（RA
 
 下表展示了各种最先进模型在中文数据集上的性能表现，按Overall分数从高到低排序。**粗体**值表示最佳实验结果，***斜体粗体***值表示第二佳实验结果。
 
-| Models                        | Overall | Multi-Level Filter | Composition   | Reasoning     |
-| ----------------------------- | ------- | ------------------ | ------------- | ------------- |
-| `Gemini-2.5-pro-preview`    | 87.33   | **97.92**         | **94.20**    | ***70.18*** |
-| `Claude-3.7-sonnet`         | 85.74   | ***97.62***      | ***90.59*** | **70.39**    |
-| `Gemini-2.5-flash-preview`  | 81.85   | 93.92              | 88.54         | 63.86         |
-| `Qwen3-235B-A22B`           | 80.76   | 94.92              | 88.18         | 60.23         |
-| `Qwen3-30B-A3B`             | 80.45   | 95.87              | 86.11         | 61.42         |
-| `Deepseek-V3(241226)`       | 77.54   | 94.58              | 81.00         | 60.32         |
-| `Qwen3-235B-A22B w/o think` | 75.20   | 91.50              | 79.67         | 57.14         |
-| `Qwen-2.5-MAX`              | 74.43   | 93.25              | 78.28         | 55.37         |
-| `Qwen3-30B-A3B w/o think`   | 71.05   | 91.08              | 72.22         | 54.76         |
-| `Gemma3_27b`                | 70.24   | 73.09              | 92.21         | 50.24         |
-| `Qwen3_32B`                 | 69.69   | 89.75              | 75.74         | 46.70         |
-| `GPT4.1`                    | 66.26   | 89.75              | 71.95         | 41.27         |
-| `Qwen2.5_72B`               | 64.87   | 92.92              | 64.99         | 44.14         |
-| `GPT4o-1120`                | 64.58   | 88.50              | 70.21         | 39.35         |
-| `Gemma3_12b`                | 64.10   | 60.20              | 89.92         | 50.52         |
-| `Qwen3_8B`                  | 63.04   | 86.87              | 67.49         | 39.47         |
-| `Qwen3_32B w/o think`       | 60.73   | 59.53              | 89.50         | 41.30         |
-| `Qwen2.5_32B`               | 58.76   | 92.00              | 51.33         | 44.60         |
-| `Qwen2.5_14B`               | 55.94   | 89.42              | 52.69         | 35.87         |
-| `Qwen2.5_7B`                | 49.31   | 83.29              | 47.47         | 26.92         |
-| `Qwen3_8B w/o think`        | 50.02   | 47.83              | 83.96         | 28.17         |
-| `Gemma3_4b`                 | 47.67   | 37.41              | 78.33         | 39.26         |
+| Models                        | Overall | Multi-Level Filter  | Composition         | Reasoning           |
+| ----------------------------- | ------- | ------------------- | ------------------- | ------------------- |
+| `Gemini-2.5-pro-preview`    | 87.33   | **97.92**     | **94.20**     | ***70.18*** |
+| `Claude-3.7-sonnet`         | 85.74   | ***97.62*** | ***90.59*** | **70.39**     |
+| `Gemini-2.5-flash-preview`  | 81.85   | 93.92               | 88.54               | 63.86               |
+| `Qwen3-235B-A22B`           | 80.76   | 94.92               | 88.18               | 60.23               |
+| `Qwen3-30B-A3B`             | 80.45   | 95.87               | 86.11               | 61.42               |
+| `Deepseek-V3(241226)`       | 77.54   | 94.58               | 81.00               | 60.32               |
+| `Qwen3-235B-A22B w/o think` | 75.20   | 91.50               | 79.67               | 57.14               |
+| `Qwen-2.5-MAX`              | 74.43   | 93.25               | 78.28               | 55.37               |
+| `Qwen3-30B-A3B w/o think`   | 71.05   | 91.08               | 72.22               | 54.76               |
+| `Gemma3_27b`                | 70.24   | 73.09               | 92.21               | 50.24               |
+| `Qwen3_32B`                 | 69.69   | 89.75               | 75.74               | 46.70               |
+| `GPT4.1`                    | 66.26   | 89.75               | 71.95               | 41.27               |
+| `Qwen2.5_72B`               | 64.87   | 92.92               | 64.99               | 44.14               |
+| `GPT4o-1120`                | 64.58   | 88.50               | 70.21               | 39.35               |
+| `Gemma3_12b`                | 64.10   | 60.20               | 89.92               | 50.52               |
+| `Qwen3_8B`                  | 63.04   | 86.87               | 67.49               | 39.47               |
+| `Qwen3_32B w/o think`       | 60.73   | 59.53               | 89.50               | 41.30               |
+| `Qwen2.5_32B`               | 58.76   | 92.00               | 51.33               | 44.60               |
+| `Qwen2.5_14B`               | 55.94   | 89.42               | 52.69               | 35.87               |
+| `Qwen2.5_7B`                | 49.31   | 83.29               | 47.47               | 26.92               |
+| `Qwen3_8B w/o think`        | 50.02   | 47.83               | 83.96               | 28.17               |
+| `Gemma3_4b`                 | 47.67   | 37.41               | 78.33               | 39.26               |
 
 ### 英文数据集性能对比
 
@@ -254,10 +254,11 @@ python eval.py \
 ##### 调试参数
 
 - `--verbose`: 启用详细日志（默认：False）
+
   - 输出详细的评估过程和调试信息
   - 有助于问题排查和性能分析
-
 - `--inference-mode`: 是否启用推理模式（默认：False）
+
   - 设为 True 时，启用模型的推理模式
   - 适用于如 Qwen3_infer 等推理优化模型
   - 通常与 eval-ch-infer 和 eval-en-infer 命令配合使用
@@ -288,47 +289,64 @@ python examples/export_errors.py
 
 ```
 PRGB/
-├── README.md                 # 项目说明文档
-├── pyproject.toml           # 项目配置文件
-├── requirements.txt         # Python依赖
-├── eval.py                 # 主评估脚本
-├── test_imports.py         # 导入测试脚本
-├── run_eval.sh             # 运行脚本
-├── Makefile                # 构建和开发命令
-├── CONTRIBUTING.md         # 贡献指南
-├── CHANGELOG.md            # 变更日志
-├── .gitignore              # Git忽略文件
-├── .flake8                 # 代码风格配置
-├── .pre-commit-config.yaml # 预提交钩子配置
-├── LEGAL.md                # 法律声明
+├── README.md                 # Project documentation
+├── README_zh.md             # Chinese documentation
+├── USAGE.md                 # Usage guide
+├── pyproject.toml           # Project configuration
+├── requirements.txt         # Python dependencies
+├── eval.py                 # Main evaluation script
+├── example_usage.py        # Example usage script
+├── run_eval.sh             # Run script
+├── run_http_eval.sh        # HTTP evaluation script
+├── Makefile                # Build and development commands
+├── CONTRIBUTING.md         # Contribution guidelines
+├── CHANGELOG.md            # Change log
+├── LEGAL.md                # Legal notice
+├── .gitignore              # Git ignore file
+├── .flake8                 # Code style configuration
+├── .pre-commit-config.yaml # Pre-commit hook configuration
+├── .gitattributes          # Git attributes
 │
-├── core/                   # 核心功能模块
-│   ├── __init__.py        # 模块初始化
-│   ├── eval.py            # 主评估逻辑
-│   ├── eval_apis.py       # API评估(暂不支持，建设中)
-│   ├── data.py            # 数据处理
-│   ├── models.py          # 模型定义
-│   └── eval_types.py      # 评估类型定义
+├── core/                   # Core functionality modules
+│   ├── __init__.py        # Module initialization
+│   ├── eval.py            # Main evaluation logic
+│   ├── data.py            # Data processing
+│   ├── eval_types.py      # Evaluation type definitions
+│   ├── logger.py          # Logging functionality
+│   └── models/            # Model implementations
+│       ├── __init__.py    # Models module initialization
+│       ├── api_models.py  # API-based model implementations
+│       └── vllm_models.py # VLLM-based model implementations
 │
-├── config/                 # 配置文件
-│   ├── api_prompt_config_ch.json  # 中文API提示配置
-│   ├── api_prompt_config_en.json  # 英文API提示配置
-│   └── default_prompt_config.json # 默认提示配置
+├── config/                 # Configuration files
+│   ├── api_prompt_config_ch.json  # Chinese API prompt configuration
+│   ├── api_prompt_config_en.json  # English API prompt configuration
+│   └── default_prompt_config.json # Default prompt configuration
 │
-├── utils/                  # 工具函数
-│   ├── __init__.py        # 模块初始化
-│   ├── filter_mutual_right_samples.py  # 过滤相互正确样本
-│   ├── filter_similar_query.py         # 过滤相似查询
-│   └── transfer_csv_to_jsonl.py        # CSV转JSONL工具
+├── utils/                  # Utility functions
+│   ├── __init__.py        # Module initialization
+│   └── transfer_csv_to_jsonl.py  # CSV to JSONL conversion tool
 │
-├── examples/               # 示例脚本
-│   ├── basic_evaluation.py # 基本使用示例
-│   └── export_errors.py    # 错误样本导出示例
+├── examples/               # Example scripts
+│   ├── basic_evaluation.py # Basic usage example
+│   └── export_errors.py    # Error sample export example
 │
-└── tests/                  # 测试文件
-    ├── test_data_process.py    # 数据处理测试
-    ├── test_checkanswer.py     # 答案检查测试
-    └── test.jsonl              # 测试数据
+├── tests/                  # Test files
+│   ├── test_imports.py     # Import test script
+│   ├── test_data_process.py    # Data processing tests
+│   ├── test_checkanswer.py     # Answer checking tests
+│   ├── test_eval.py            # Evaluation tests
+│   └── test_import_models.py   # Model import tests
+│
+├── data/                   # Data files
+│   ├── zh.jsonl           # Chinese evaluation data
+│   └── en.jsonl           # English evaluation data
+│
+├── results/                # Evaluation results (generated)
+│
+└── pic/                    # Images and figures
+    ├── benchmark.jpg       # Benchmark figure
+    └── examples.jpg        # Examples figure
 ```
 
 ## 开发指南
