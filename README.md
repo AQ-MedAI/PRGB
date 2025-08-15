@@ -15,12 +15,12 @@ PRGB (Placeholder RAG Benchmark) is a benchmark tool focused on evaluating docum
 ### Upcoming Updates
 
 1. **✅ API-based Inference**: Provide inference and verification functionalities based on APIs.
-2. **Data Quality Improvement**: The dataset is currently undergoing manual verification and will soon have a more accurate version with improved data quality and consistency.
+2. **✅ Data Quality Improvement**: The dataset is currently undergoing manual verification and will soon have a more accurate version with improved data quality and consistency.
 3. **Retrieval Testing Version**: A version specifically designed for testing retrieval systems is currently under development and will be released soon.
 
 ## Key Features
 
-- 🎯 **Multi-Model Support**: Supports multiple large language models with local vllm inference
+- 🎯 **Multi-Model Support**: Supports multiple large language models with local VLLM inference
 - 📊 **Standardized Evaluation**: Provides unified evaluation metrics and processes
 - 🔧 **Flexible Configuration**: Supports noise configuration, placeholder configuration, and other parameter adjustments
 - 🌍 **Multi-Language Support**: Supports Chinese and English dataset evaluation
@@ -33,7 +33,7 @@ In our experiments, we uniformly set the following configurations:
 
 ### Chinese Dataset Performance Comparison
 
-The table below shows the performance of various state-of-the-art models on Chinese datasets, sorted by Overall score from high to low. **Bold** values indicate the best experimental results, and ***italic bold*** values indicate the second-best experimental results.
+The table below presents the performance of various state-of-the-art models on Chinese datasets, sorted by Overall score from highest to lowest. **Bold** values indicate the best experimental results, and ***italic bold*** values indicate the second-best experimental results.
 
 | Models                        | Overall | Multi-Level Filter  | Composition         | Reasoning       |
 | ----------------------------- | ------- | ------------------- | ------------------- | --------------- |
@@ -163,7 +163,7 @@ EVAL_RESULT_FILE=results/model_eval_result.jsonl make export-errors
 
 #### Method 2: Using Shell Script
 
-If you need to modify other parameters, using shell is recommended
+If you need to modify other parameters, using the shell is recommended.
 
 ```bash
 # Run with default parameters (requires model path)
@@ -226,14 +226,14 @@ python eval.py \
   - Used for multiple evaluations to get average scores
   - Recommended values: 1-5 times
 - `--shuffle`: Whether to shuffle data (default: True)
-  - Controls whether to randomly shuffle evaluation data order
+  - Controls whether to randomly shuffle the evaluation data order
   - Helps reduce order bias
 
 ##### Output Configuration Parameters
 
 - `--output-path`: Output directory (default: ./results)
-  - Path to save evaluation results and score files
-  - Will automatically create directory if it doesn't exist
+  - Path to save evaluation results and score files.
+  - Will automatically create a directory if it doesn't exist.
 
 ##### Evaluation Parameters
 
