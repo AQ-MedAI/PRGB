@@ -1,6 +1,6 @@
 # PRGB - RAG Evaluation Tool by Placeholders
 
-[中文文档](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
+[中文主页](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
 
 ## Project Background
 
