@@ -1,6 +1,6 @@
 # PRGB - Benchmarking LLM's Rag Ability by Placeholders
 
-[中文主页](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)|[Paper](https://www.arxiv.org/pdf/2507.22927)
+[中文主页](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md) | [Paper](https://www.arxiv.org/pdf/2507.22927)
 
 ## Project Background
 
