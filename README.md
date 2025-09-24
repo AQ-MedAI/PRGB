@@ -1,6 +1,6 @@
 # PRGB - Benchmarking LLM's Rag Ability by Placeholders
 
-[中文主页](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md) | [Paper](https://www.arxiv.org/pdf/2507.22927) | [HuggingFace](https://huggingface.co/datasets/AQ-MedAI/PRGB-ZH) | [WeChat]
+[中文主页](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md) | [Paper](https://www.arxiv.org/pdf/2507.22927) | [HuggingFace](https://huggingface.co/datasets/AQ-MedAI/PRGB-ZH) | [WeChat](https://github.com/AQ-MedAI/PRGB/blob/main/pic/rag_wechat.JPG)
 
 ## Project Background
 
