@@ -381,7 +381,7 @@ make lint
 
 ### License
 
-Please see the [LEGAL.md](LEGAL.md) file for detailed license information.
+Please see the [LICENSE](LICENSE) file for detailed license information.
 
 ## Contact
 
