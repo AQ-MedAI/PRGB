@@ -1,4 +1,14 @@
+<div align="center">
+
 # PRGB - RAG Evaluation Tool by Placeholders
+
+[<img align="center" src="https://img.shields.io/badge/arXiv-2507.22927%20PRGB-b31b1b" />](https://arxiv.org/abs/2507.22927)
+[<img align="center" src="https://img.shields.io/badge/Dataset-PRGB -yellow" />](https://huggingface.co/datasets/AQ-MedAI/PRGB-ZH)
+
+</div>
+
+- This is the repo for the paper [PRGB Benchmark: A Robust Placeholder-Assisted Algorithm for Benchmarking Retrieval-Augmented Generation](https://arxiv.org/abs/2507.22927).
+- 🎉 **Accepted to [AAAI 2026](https://aaai.org/conference/aaai/aaai-26/)**
 
 [中文文档](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
 
