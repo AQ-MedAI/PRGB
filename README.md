@@ -173,7 +173,7 @@ EVAL_RESULT_FILE=results/model_eval_result.jsonl make export-errors
 
 #### Method 2: Using Shell Script
 
-If you need to modify other parameters, using shell is recommended
+If you need to modify other parameters, using the shell is recommended.
 
 ```bash
 # Run with default parameters (requires model path)
