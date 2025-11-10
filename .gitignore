@@ -6,3 +6,4 @@ get_eval_ans.py
 *.jsonl
 combinations.py
 api_models/api.py
+.DS_Store

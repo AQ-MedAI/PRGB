@@ -1,6 +1,16 @@
-# PRGB - Benchmarking LLM's Rag Ability by Placeholders
+<div align="center">
 
-[中文主页](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md) | [Paper](https://www.arxiv.org/pdf/2507.22927) | [HuggingFace](https://huggingface.co/datasets/AQ-MedAI/PRGB-ZH) | [WeChat](https://github.com/AQ-MedAI/PRGB/blob/main/pic/rag_wechat.JPG)
+# PRGB - RAG Evaluation Tool by Placeholders
+
+[<img align="center" src="https://img.shields.io/badge/arXiv-2507.22927%20PRGB-b31b1b" />](https://arxiv.org/abs/2507.22927)
+[<img align="center" src="https://img.shields.io/badge/Dataset-PRGB -yellow" />](https://huggingface.co/datasets/AQ-MedAI/PRGB-ZH)
+
+</div>
+
+- This is the repo for the paper [PRGB Benchmark: A Robust Placeholder-Assisted Algorithm for Benchmarking Retrieval-Augmented Generation](https://arxiv.org/abs/2507.22927).
+- 🎉 **Accepted to [AAAI 2026](https://aaai.org/conference/aaai/aaai-26/)**
+
+[中文文档](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
 
 ## Project Background
 
@@ -20,7 +30,7 @@ PRGB (Placeholder RAG Benchmark) is a benchmark tool focused on evaluating docum
 
 ## Key Features
 
-- 🎯 **Multi-Model Support**: Supports multiple large language models with local VLLM inference
+- 🎯 **Multi-Model Support**: Supports multiple large language models with local vllm inference
 - 📊 **Standardized Evaluation**: Provides unified evaluation metrics and processes
 - 🔧 **Flexible Configuration**: Supports noise configuration, placeholder configuration, and other parameter adjustments
 - 🌍 **Multi-Language Support**: Supports Chinese and English dataset evaluation
@@ -33,7 +43,7 @@ In our experiments, we uniformly set the following configurations:
 
 ### Chinese Dataset Performance Comparison
 
-The table below presents the performance of various state-of-the-art models on Chinese datasets, sorted by Overall score from highest to lowest. **Bold** values indicate the best experimental results, and ***italic bold*** values indicate the second-best experimental results.
+The table below shows the performance of various state-of-the-art models on Chinese datasets, sorted by Overall score from high to low. **Bold** values indicate the best experimental results, and ***italic bold*** values indicate the second-best experimental results.
 
 | Models                        | Overall | Multi-Level Filter  | Composition         | Reasoning       |
 | ----------------------------- | ------- | ------------------- | ------------------- | --------------- |
@@ -226,14 +236,14 @@ python eval.py \
   - Used for multiple evaluations to get average scores
   - Recommended values: 1-5 times
 - `--shuffle`: Whether to shuffle data (default: True)
-  - Controls whether to randomly shuffle the evaluation data order
+  - Controls whether to randomly shuffle evaluation data order
   - Helps reduce order bias
 
 ##### Output Configuration Parameters
 
 - `--output-path`: Output directory (default: ./results)
-  - Path to save evaluation results and score files.
-  - Will automatically create a directory if it doesn't exist.
+  - Path to save evaluation results and score files
+  - Will automatically create directory if it doesn't exist
 
 ##### Evaluation Parameters
 
@@ -381,7 +391,7 @@ make lint
 
 ### License
 
-Please see the [LEGAL.md](LEGAL.md) file for detailed license information.
+Please see the [LICENSE](LICENSE) file for detailed license information.
 
 ## Contact
 
