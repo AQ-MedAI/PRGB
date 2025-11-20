@@ -8,9 +8,6 @@
 </div>
 
 - This is the repo for the paper [PRGB Benchmark: A Robust Placeholder-Assisted Algorithm for Benchmarking Retrieval-Augmented Generation](https://arxiv.org/abs/2507.22927).
-- You can download the dataset from the following link:
-  - **[PRGB-ZH]([https://example.com/path/to/your/dataset.zip](https://huggingface.co/datasets/AQ-MedAI/PRGB))**
-
 - 🎉 **Accepted to [AAAI 2026](https://aaai.org/conference/aaai/aaai-26/)**
 
 [中文文档](README_zh.md) | [Usage Guide](USAGE.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
